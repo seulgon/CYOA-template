@@ -1,0 +1,41 @@
+.gold-particles-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1; /* 배경 이미지/음영과 UI 사이 */
+    overflow: hidden;
+}
+
+.gold-particle {
+    position: absolute;
+    background-color: #f7da91;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 10px 2px rgba(247, 218, 145, 0.7), 
+        0 0 20px 5px rgba(235, 192, 80, 0.3),
+        inset 0 0 4px rgba(255, 255, 255, 0.8);
+    will-change: transform, opacity;
+    animation: gold-twinkle ease-in-out infinite;
+}
+
+.intensity-low .gold-particle {
+    box-shadow: 0 0 8px 1px rgba(247, 218, 145, 0.5);
+}
+
+.intensity-high .gold-particle {
+    box-shadow: 
+        0 0 15px 3px rgba(247, 218, 145, 0.8), 
+        0 0 30px 8px rgba(235, 192, 80, 0.4),
+        inset 0 0 6px rgba(255, 255, 255, 0.9);
+}
+
+@keyframes gold-twinkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}

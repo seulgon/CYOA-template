@@ -1,0 +1,55 @@
+/* StarField.css */
+
+.star-field {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    transform-origin: center center;
+    transition: transform 0.1s;
+    will-change: transform;
+}
+
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 10px #fff, 0 0 20px var(--accent-color);
+    animation: twinkle ease-in-out infinite;
+    will-change: opacity, transform;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Warp animation for Intro exit */
+.star-field.warp-exit {
+    animation: warp-zoom 1.5s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+@keyframes warp-zoom {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(20) rotate(5deg);
+        opacity: 0;
+    }
+}

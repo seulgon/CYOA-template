@@ -1,0 +1,353 @@
+/* ============================================
+   BGM Modal — Styles
+   ============================================ */
+
+/* Backdrop */
+.bgm-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9990;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+}
+
+/* Modal Overlay Container (for centering) */
+.bgm-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9991;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* Let events through to the backdrop or modal */
+}
+
+/* Modal Container */
+.bgm-modal {
+    position: relative;
+    z-index: 9991;
+    pointer-events: auto; /* Re-enable pointer events for the modal itself */
+    width: 340px;
+    max-height: 80vh;
+
+    background: linear-gradient(160deg, #0e0e1a 60%, #1a1225 100%);
+    border: 1px solid rgba(235, 192, 80, 0.3);
+    border-radius: 20px;
+    box-shadow:
+        0 0 0 1px rgba(235, 192, 80, 0.08),
+        0 20px 60px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+    color: #f0ead8;
+}
+
+/* Header */
+.bgm-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem 0.75rem;
+    border-bottom: 1px solid rgba(235, 192, 80, 0.12);
+}
+
+.bgm-modal-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ebc050;
+}
+
+.bgm-modal-title-icon {
+    opacity: 0.8;
+}
+
+.bgm-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    padding: 0.25rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+@media (hover: hover) {
+    .bgm-close-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+    }
+}
+
+/* Now Playing */
+.bgm-now-playing {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    background: rgba(235, 192, 80, 0.04);
+}
+
+/* Vinyl disc */
+.bgm-vinyl {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50%, #2a2040 0%, #0d0d1a 100%);
+    border: 3px solid rgba(235, 192, 80, 0.25);
+    position: relative;
+    transition: animation 0.3s;
+}
+
+.bgm-vinyl[data-playing="true"] {
+    animation: vinyl-spin 4s linear infinite;
+}
+
+.bgm-vinyl-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ebc050 0%, #a08020 100%);
+    box-shadow: 0 0 6px rgba(235, 192, 80, 0.5);
+}
+
+@keyframes vinyl-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.bgm-now-playing-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.bgm-now-playing-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #ebc050;
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+}
+
+.bgm-now-playing-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #f0ead8;
+    margin-bottom: 0.2rem;
+}
+
+.bgm-now-playing-sub {
+    font-size: 0.72rem;
+    color: rgba(240, 234, 216, 0.45);
+}
+
+/* Controls */
+.bgm-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1.25rem 0.75rem;
+}
+
+.bgm-ctrl-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(240, 234, 216, 0.8);
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+@media (hover: hover) {
+    .bgm-ctrl-btn:hover {
+        background: rgba(235, 192, 80, 0.12);
+        border-color: rgba(235, 192, 80, 0.4);
+        color: #ebc050;
+        transform: scale(1.08);
+    }
+}
+
+.bgm-ctrl-btn.primary {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #ebc050, #a08020);
+    border: none;
+    color: #0a0a14;
+    box-shadow: 0 4px 16px rgba(235, 192, 80, 0.35);
+}
+
+@media (hover: hover) {
+    .bgm-ctrl-btn.primary:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 24px rgba(235, 192, 80, 0.5);
+        background: linear-gradient(135deg, #e2c050, #b09030);
+    }
+}
+
+/* Volume */
+.bgm-volume-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0 1.25rem 0.9rem;
+}
+
+.bgm-mute-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(240, 234, 216, 0.5);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+
+@media (hover: hover) {
+    .bgm-mute-btn:hover {
+        color: #ebc050;
+    }
+}
+
+.bgm-volume-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    cursor: pointer;
+}
+
+.bgm-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #ebc050;
+    box-shadow: 0 0 6px rgba(235, 192, 80, 0.6);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+@media (hover: hover) {
+    .bgm-volume-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.25);
+    }
+}
+
+.bgm-volume-label {
+    font-size: 0.72rem;
+    color: rgba(240, 234, 216, 0.45);
+    min-width: 32px;
+    text-align: right;
+}
+
+/* Track List */
+.bgm-track-list {
+    overflow-y: auto;
+    max-height: 200px;
+    padding: 0.4rem 0.5rem 0.75rem;
+    border-top: 1px solid rgba(235, 192, 80, 0.1);
+
+    /* Scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(235, 192, 80, 0.3) transparent;
+}
+
+.bgm-track-list::-webkit-scrollbar {
+    width: 4px;
+}
+.bgm-track-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+.bgm-track-list::-webkit-scrollbar-thumb {
+    background: rgba(235, 192, 80, 0.3);
+    border-radius: 2px;
+}
+
+.bgm-track-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.45rem 0.75rem;
+    border-radius: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: rgba(240, 234, 216, 0.55);
+    transition: all 0.15s ease;
+}
+
+@media (hover: hover) {
+    .bgm-track-item:hover {
+        background: rgba(235, 192, 80, 0.07);
+        color: rgba(240, 234, 216, 0.9);
+    }
+}
+
+.bgm-track-item.active {
+    color: #ebc050;
+    background: rgba(235, 192, 80, 0.1);
+}
+
+.bgm-track-num {
+    font-size: 0.68rem;
+    font-family: monospace;
+    opacity: 0.5;
+    flex-shrink: 0;
+}
+
+.bgm-track-name {
+    flex: 1;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bgm-track-playing-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ebc050;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px rgba(235, 192, 80, 0.8);
+}
+
+.bgm-track-playing-dot[data-playing="true"] {
+    animation: dot-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+}

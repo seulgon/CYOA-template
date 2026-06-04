@@ -1,0 +1,116 @@
+.tag-with-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(235, 192, 80, 0.2);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+@media (hover: hover) {
+    .tag-with-tooltip:hover {
+        background: rgba(235, 192, 80, 0.15);
+        border-color: var(--accent-color);
+        color: var(--accent-color);
+        transform: translateY(-1px);
+    }
+}
+
+.tag-tooltip {
+    position: absolute;
+    left: 50%;
+    /* transform은 JS에서 동적 계산됨 (기본값 없음) */
+    z-index: 1000;
+    min-width: 220px;
+    max-width: 300px;
+    pointer-events: none;
+    animation: tooltipFadeIn 0.2s ease-out;
+    opacity: 0;
+    /* JS에서 계산 완료 후 1로 변경됨 */
+}
+
+.tag-tooltip.top {
+    bottom: calc(100% + 10px);
+}
+
+.tag-tooltip.bottom {
+    top: calc(100% + 10px);
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        margin-top: 5px;
+    }
+
+    to {
+        opacity: 1;
+        margin-top: 0;
+    }
+}
+
+.tooltip-arrow {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
+
+.tag-tooltip.top .tooltip-arrow {
+    bottom: -8px;
+    border-top: 8px solid rgba(20, 20, 30, 0.95);
+}
+
+.tag-tooltip.bottom .tooltip-arrow {
+    top: -8px;
+    border-bottom: 8px solid rgba(20, 20, 30, 0.95);
+}
+
+.tooltip-content {
+    background: rgba(20, 20, 30, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(235, 192, 80, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 20px rgba(235, 192, 80, 0.1);
+}
+
+.tooltip-category {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tooltip-tag-name {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px 4px 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.tooltip-description {
+    margin: 0;
+    padding: 4px 12px 12px 12px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
