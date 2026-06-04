@@ -109,19 +109,41 @@ src/
 
 ---
 
-### 💡 AI를 활용한 "바이브 코딩(Vibe Coding)"으로 쉽게 콘텐츠 만들기
+### 💡 AI를 활용한 "바이브 코딩(Vibe Coding)"으로 콘텐츠 쉽게 쓰기
 
-코딩이나 프로그래밍 문법을 전혀 모르더라도 걱정하실 필요 없습니다. ChatGPT, Claude, Cursor, Gemini 등의 AI 코딩 어시스턴트에게 아래의 가이드라인과 템플릿을 전달하면 AI가 알아서 구문에 맞춰 콘텐츠 파일 코드를 짜 줍니다.
+프로그래밍 언어나 TypeScript의 문법을 아예 모르더라도 걱정하실 필요 없습니다. 내 작업 도구와 취향에 맞게 아래의 두 가지 방법 중 하나를 선택해 AI에게 콘텐츠 수정을 요청해 보세요.
 
-#### 1단계: AI에게 내 프로젝트 구조 설명해주기
-AI에게 작업을 요청할 때, 아래의 파일들의 용도와 위치를 먼저 복사하여 알려주세요.
-* **컷신/대화 및 연출 파일**: [cutsceneData.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cutscenes/cutsceneData.ts)
-* **본게임 선택지 카드 데이터 파일**: [races.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cyoa/races.ts)
-* **본게임 카드 섹션 관리 파일**: [index.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cyoa/index.ts)
+---
 
-#### 2단계: 실전 AI 프롬프트 템플릿 복사해서 요청하기
-AI 채팅창에 아래 텍스트를 그대로 복사하여 괄호 안의 본인 스토리 설정만 적어서 입력해 보세요.
+#### 🚀 방법 A: 에이전트 AI(Antigravity, Claude Code, Cursor) 사용하기 (권장 ⭐)
+프로젝트 내부를 스스로 탐색하고 코드를 직접 고쳐줄 수 있는 **AI 에이전트 도구**를 사용한다면, 복사-붙여넣기조차 필요 없이 한글 명령 한마디로 파일 생성 및 연동을 마칠 수 있습니다.
 
+##### 1. 에이전트 AI에게 알려줄 핵심 파일 목록
+명령을 내릴 때 아래 파일들의 이름이나 경로를 직접 지정해 주면 AI가 훨씬 정확하게 탐색하고 수정합니다.
+- **인트로/엔딩 컷신 및 스토리**: [cutsceneData.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cutscenes/cutsceneData.ts)
+- **본게임 선택지 카드 데이터**: [races.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cyoa/races.ts), [faiths.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cyoa/faiths.ts), [body.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cyoa/body.ts)
+- **새로운 탭(섹션) 추가/삭제 관리**: [index.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cyoa/index.ts)
+
+##### 2. 실전 에이전트 명령 프롬프트 예시
+- **스토리 대사 수정**:
+  > "`cutsceneData.ts` 파일을 열어서, 인트로 컷신 스토리 대사를 SF 우주 생존 모험 컨셉에 맞춰서 5단계 분량의 긴 대사로 고쳐줘. 첫 문장은 우주선 경보음으로 시작했으면 좋겠어."
+- **신규 탭/섹션 생성 및 등록**:
+  > "본게임 빌더에 '장비 상점'이라는 새로운 탭을 추가하고 싶어. `src/data/cyoa/` 폴더 아래에 `items.ts`를 신규 생성해서 무기나 방어구를 골드로 살 수 있는 선택지 카드 데이터를 만들고, 이를 `src/data/cyoa/index.ts`에 등록해서 플레이어가 선택할 수 있도록 자동 연동해줘."
+- **선택지 연계 규칙 변경**:
+  > "`body.ts`에 있는 외모나 체형 선택지들 중에서, 플레이어가 '엘프' 종족을 선택했을 때만 '수려함' 외모와 '뾰족귀' 특징 카드를 비용 없이 무료로 획득할 수 있도록 조건부 해금(freeWithTag)을 설정해줘."
+
+---
+
+#### 💬 방법 B: 웹 AI 챗봇(ChatGPT, Claude, Gemini 웹사이트) 사용하기
+웹 브라우저를 통해 AI와 대화하며 코드를 받아와 직접 편집하는 방식입니다.
+
+##### 1단계: AI에게 프로젝트 파일 구조 설명해주기
+AI 채팅창에 작업을 요청하기 전에 아래의 파일 용도와 구조를 먼저 알려주어야 올바른 구문의 TypeScript 코드를 얻을 수 있습니다.
+* **대화 및 연출 파일**: `src/data/cutscenes/cutsceneData.ts`
+* **선택지 카드 데이터 파일**: `src/data/cyoa/races.ts`, `src/data/cyoa/faiths.ts`, `src/data/cyoa/body.ts`
+* **섹션 탭 관리 파일**: `src/data/cyoa/index.ts`
+
+##### 2단계: 아래 프롬프트 템플릿을 복사하여 웹 AI에게 물어보기
 ```text
 내가 React + TypeScript 기반의 CYOA 게임 템플릿으로 나만의 게임을 만들고 있어.
 여기에 맞춰서 콘텐츠 데이터 코드를 생성해 줘.
@@ -135,10 +157,10 @@ AI 채팅창에 아래 텍스트를 그대로 복사하여 괄호 안의 본인 
 이 설정에 알맞은 스토리 대사 데이터를 작성해 주고, 기존의 `src/data/cutscenes/cutsceneData.ts`와 `src/data/cyoa/races.ts` 파일의 타입 구조 및 형식(interface)을 그대로 준수하여 덮어쓸 수 있는 전체 TypeScript 코드를 생성해 줘.
 ```
 
-#### 3단계: AI가 준 코드 붙여넣기
-1. AI가 생성해 준 TypeScript 코드를 확인합니다.
-2. 각각에 해당하는 파일([cutsceneData.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cutscenes/cutsceneData.ts) 또는 [races.ts](file:///c:/Users/kgm20/Desktop/바탕 화면/창작/쵸아 템플릿1/src/data/cyoa/races.ts))을 메모장이나 코드 에디터로 열어줍니다.
-3. 전체 내용을 지우고 AI가 작성해 준 코드를 그대로 붙여넣은 뒤 저장합니다.
+##### 3단계: 전달받은 코드를 내 프로젝트 파일에 덮어쓰기
+1. 웹 AI가 출력한 완성된 TypeScript 코드를 복사합니다.
+2. 각각에 해당하는 파일(`cutsceneData.ts` 또는 `races.ts`)을 메모장이나 VS Code 같은 에디터로 열어줍니다.
+3. 기존 내용을 전부 지우고 복사한 AI 코드를 붙여넣어 준 뒤 저장합니다.
 4. **`개발 서버 실행.cmd`**를 실행해 내 스토리가 정상적으로 작동하는지 확인합니다!
 
 ---
