@@ -21,6 +21,8 @@ interface IntroProps {
 }
 
 const devDestinations = [
+    { phase: 'PROLOGUE_STORY', label: '프롤로그 스토리' },
+    { phase: 'NARRATOR_SELECT', label: '나레이터 선택' },
     { phase: 'INTRO_STORY', label: '인트로 스토리' },
     { phase: 'WORLD_SETUP', label: '월드 셋업' },
     { phase: 'CYOA_STORY', label: 'CYOA 스토리' },

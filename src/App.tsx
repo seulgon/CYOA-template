@@ -16,6 +16,7 @@ const StoryScreen = lazy(() => import('./components/Story/StoryScreen'));
 const VioletDeckCYOA = lazy(() => import('./components/VioletDeckCYOA/VioletDeckCYOA'));
 const CharacterSheet = lazy(() => import('./components/CharacterSheet/CharacterSheet'));
 const RewardSelect = lazy(() => import('./components/RewardSelect/RewardSelect'));
+const NarratorSelect = lazy(() => import('./components/NarratorSelect/NarratorSelect'));
 
 // 로딩 화면
 const LoadingFallback = () => (
@@ -41,8 +42,7 @@ const LoadingFallback = () => (
     불러오는 중...
   </div>
 );
-
-type GamePhase = 'INTRO' | 'INTRO_STORY' | 'WORLD_SETUP' | 'CYOA_STORY' | 'CYOA_BUILD' | 'REWARD_STORY' | 'REWARD_SELECT' | 'CHARACTER_SHEET' | 'LOCATION_CUTSCENE';
+type GamePhase = 'INTRO' | 'PROLOGUE_STORY' | 'NARRATOR_SELECT' | 'INTRO_STORY' | 'WORLD_SETUP' | 'CYOA_STORY' | 'CYOA_BUILD' | 'REWARD_STORY' | 'REWARD_SELECT' | 'CHARACTER_SHEET' | 'LOCATION_CUTSCENE';
 
 const createDevCharacterData = () => ({
   name: '개발자',
@@ -82,6 +82,7 @@ function App() {
   const [rewardSelectResults, setRewardSelectResults] = useState<any>(null);
   // 스토리 대화 선택지에서 수집된 태그
   const [dialogueTags, setDialogueTags] = useState<string[]>([]);
+  const [selectedNarrator, setSelectedNarrator] = useState<string>('angel');
 
   // Notification State
   const [notification, setNotification] = useState<{ message: string; type: ToastType } | null>(null);
@@ -105,7 +106,7 @@ function App() {
     // INTRO phase music is now triggered by the "Accept" button in Intro.tsx
     if (phase === 'INTRO') return;
 
-    if (phase === 'INTRO_STORY' || phase === 'WORLD_SETUP' || phase === 'CYOA_STORY' || phase === 'REWARD_STORY' || phase === 'REWARD_SELECT') {
+    if (phase === 'PROLOGUE_STORY' || phase === 'NARRATOR_SELECT' || phase === 'INTRO_STORY' || phase === 'WORLD_SETUP' || phase === 'CYOA_STORY' || phase === 'REWARD_STORY' || phase === 'REWARD_SELECT') {
       playBGM('intro');
     } else if (phase === 'CYOA_BUILD') {
       playBGM('cyoa');
@@ -115,6 +116,15 @@ function App() {
   }, [phase, playBGM]);
 
   const handleStartGame = () => {
+    setPhase('PROLOGUE_STORY');
+  };
+
+  const handlePrologueComplete = () => {
+    setPhase('NARRATOR_SELECT');
+  };
+
+  const handleNarratorSelectComplete = (narratorId: string) => {
+    setSelectedNarrator(narratorId);
     setPhase('INTRO_STORY');
   };
 
@@ -209,6 +219,8 @@ function App() {
   const handleDevNavigate = (targetPhase: string) => {
     const validPhases: GamePhase[] = [
       'INTRO',
+      'PROLOGUE_STORY',
+      'NARRATOR_SELECT',
       'INTRO_STORY',
       'WORLD_SETUP',
       'CYOA_STORY',
@@ -288,6 +300,21 @@ function App() {
       )}
 
       <Suspense fallback={<LoadingFallback />}>
+        {phase === 'PROLOGUE_STORY' && (
+          <StoryScreen 
+            onComplete={handlePrologueComplete} 
+            {...CUTSCENE_DATA.PROLOGUE_STORY}
+          />
+        )}
+
+        {phase === 'NARRATOR_SELECT' && (
+          <NarratorSelect
+            onComplete={handleNarratorSelectComplete}
+            onBack={() => setPhase('INTRO')}
+            initialNarrator={selectedNarrator}
+          />
+        )}
+
         {phase === 'INTRO_STORY' && (
           <StoryScreen 
             onComplete={handleIntroStoryComplete} 

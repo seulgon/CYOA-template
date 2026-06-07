@@ -22,6 +22,17 @@ export interface CutsceneData {
 }
 
 export const CUTSCENE_DATA: Record<string, CutsceneData> = {
+    PROLOGUE_STORY: {
+        frames: [
+            {
+                backgroundImage: "./assets/images/backgrounds/timeline_map_clock_room_4k.webp",
+                dialogues: [
+                    { name: "나레이션", text: "어느날 눈을 떠보니 시공간의 틈에 빠져들었고," },
+                    { name: "나레이션", text: "그런 나를 발견하고 멀리서 다섯 빛 덩어리가 다가온다." }
+                ]
+            }
+        ]
+    },
     INTRO_STORY: {
         frames: [
             {
