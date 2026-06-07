@@ -158,18 +158,23 @@ const VioletDeckCYOA = ({ onBack, ...builderProps }: VioletDeckCYOAProps) => {
   return (
     <div className="violet-deck-cyoa">
       <div className="violet-scene-frame">
-        <picture>
-          <source
-            media="(max-width: 768px), (pointer: coarse)"
-            srcSet="./assets/images/intro/violet_cyoa_wide.webp"
+        <div className="violet-stage" aria-hidden="true">
+          <img
+            className="violet-stage-bg"
+            src="./assets/images/backgrounds/boon_relic_library_4k.webp"
+            alt=""
           />
           <img
-            className="violet-scene-image"
-            src="./assets/images/intro/violet_cyoa_wide_more.webp"
+            className="violet-stage-narrator"
+            src="./assets/images/intro/violet_standing_dark_clear.png"
             alt=""
-            aria-hidden="true"
           />
-        </picture>
+          <img
+            className="violet-stage-table"
+            src="./assets/images/stage/red_silk_table.png"
+            alt=""
+          />
+        </div>
         <div className="violet-scene-shade" aria-hidden="true" />
         <GoldParticles count={55} intensity="high" />
 

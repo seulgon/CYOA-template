@@ -9,6 +9,17 @@ export const CRITICAL_IMAGE_URLS = [
   './assets/images/intro/violet_intro.webp',
 ];
 
+const STAGE_LAYER_URLS = [
+  './assets/images/intro/violet_standing_dark_clear.png',
+  './assets/images/stage/red_silk_table.png',
+];
+
+const STAGE_BACKGROUND_URLS = {
+  timeline: './assets/images/backgrounds/timeline_map_clock_room_4k.webp',
+  boonLibrary: './assets/images/backgrounds/boon_relic_library_4k.webp',
+  rewardTreasure: './assets/images/backgrounds/reward_crystal_treasure_room_4k.webp',
+};
+
 const uniqueUrls = (urls: Array<string | null | undefined>): string[] => (
   Array.from(new Set(urls.filter((url): url is string => !!url).map(normalizeImageUrl).filter(Boolean)))
 );
@@ -50,6 +61,8 @@ export const getFirstCyoaSectionImageUrls = (): string[] => {
 export const getAllGameImageUrls = (): string[] => (
   uniqueUrls([
     ...CRITICAL_IMAGE_URLS,
+    ...Object.values(STAGE_BACKGROUND_URLS),
+    ...STAGE_LAYER_URLS,
     ...getCutsceneImageUrls(),
     ...getCyoaImageUrls(),
   ])
@@ -67,9 +80,23 @@ export const getPhaseImageUrls = (phase: string): string[] => {
         ...getFirstCyoaSectionImageUrls(),
       ]);
     case 'CYOA_BUILD':
-      return getFirstCyoaSectionImageUrls();
+      return uniqueUrls([
+        STAGE_BACKGROUND_URLS.boonLibrary,
+        ...STAGE_LAYER_URLS,
+        ...getFirstCyoaSectionImageUrls(),
+      ]);
+    case 'WORLD_SETUP':
+      return uniqueUrls([
+        STAGE_BACKGROUND_URLS.timeline,
+        ...STAGE_LAYER_URLS,
+      ]);
     case 'LOCATION_CUTSCENE':
       return getCutsceneImageUrls('LOCATION_CUTSCENE');
+    case 'REWARD_SELECT':
+      return uniqueUrls([
+        STAGE_BACKGROUND_URLS.rewardTreasure,
+        ...STAGE_LAYER_URLS,
+      ]);
     default:
       return [];
   }

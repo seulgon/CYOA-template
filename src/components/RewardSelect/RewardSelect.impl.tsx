@@ -127,18 +127,23 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData }) 
             />
 
             <div className="world-setup-scene-frame">
-                <picture>
-                    <source
-                        media="(max-width: 768px), (pointer: coarse)"
-                        srcSet="./assets/images/intro/violet_intro_wide.webp"
+                <div className="world-setup-stage" aria-hidden="true">
+                    <img
+                        className="world-setup-stage-bg"
+                        src="./assets/images/backgrounds/reward_crystal_treasure_room_4k.webp"
+                        alt=""
                     />
                     <img
-                        className="world-setup-scene-image"
-                        src="./assets/images/intro/violet_intro_wide_more.webp"
+                        className="world-setup-stage-narrator"
+                        src="./assets/images/intro/violet_standing_dark_clear.png"
                         alt=""
-                        aria-hidden="true"
                     />
-                </picture>
+                    <img
+                        className="world-setup-stage-table"
+                        src="./assets/images/stage/red_silk_table.png"
+                        alt=""
+                    />
+                </div>
                 <div className="world-setup-scene-shade" aria-hidden="true" />
                 <GoldParticles count={55} intensity="high" />
 
