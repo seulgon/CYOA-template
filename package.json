@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "clean": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if (Test-Path dist) { Remove-Item dist -Recurse -Force }\"",
+    "build": "npm run clean && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, lazy, Suspense } from 'react';
+import { useState, useCallback, useEffect, lazy, Suspense, type CSSProperties } from 'react';
 import './App.css';
 import Intro from './components/Intro/Intro';
 import Toast, { type ToastType } from './components/common/Toast';
@@ -9,6 +9,7 @@ import { CUTSCENE_DATA } from './data/cutscenes/cutsceneData';
 import { useImagePreloader } from './hooks/useImagePreloader';
 import { useAudioStore } from './hooks/useAudioStore';
 import BGMButton from './components/common/BGMButton';
+import { DEFAULT_NARRATOR_ID, getNarratorThemeVariables, type NarratorId } from './data/narrators';
 
 // Lazy-loaded 컴포넌트 (코드 분할)
 const WorldSetup = lazy(() => import('./components/WorldSetup/WorldSetup'));
@@ -46,6 +47,7 @@ type GamePhase = 'INTRO' | 'PROLOGUE_STORY' | 'NARRATOR_SELECT' | 'INTRO_STORY' 
 
 const createDevCharacterData = () => ({
   name: '개발자',
+  narratorId: DEFAULT_NARRATOR_ID,
   epithet: '화면을 넘나드는 자',
   choices: [],
   points: 0,
@@ -82,7 +84,10 @@ function App() {
   const [rewardSelectResults, setRewardSelectResults] = useState<any>(null);
   // 스토리 대화 선택지에서 수집된 태그
   const [dialogueTags, setDialogueTags] = useState<string[]>([]);
-  const [selectedNarrator, setSelectedNarrator] = useState<string>('angel');
+  const [selectedNarrator, setSelectedNarrator] = useState<NarratorId | null>(null);
+  const narratorThemeStyle = selectedNarrator
+    ? getNarratorThemeVariables(selectedNarrator) as CSSProperties
+    : undefined;
 
   // Notification State
   const [notification, setNotification] = useState<{ message: string; type: ToastType } | null>(null);
@@ -123,7 +128,7 @@ function App() {
     setPhase('NARRATOR_SELECT');
   };
 
-  const handleNarratorSelectComplete = (narratorId: string) => {
+  const handleNarratorSelectComplete = (narratorId: NarratorId) => {
     setSelectedNarrator(narratorId);
     setPhase('INTRO_STORY');
   };
@@ -149,7 +154,10 @@ function App() {
 
 
   const handleWorldSetupComplete = (data: { name: string; points: number; choices: string[]; tags: string[]; rawSelections: Record<string, string>; lastStep: number }) => {
-    setWorldSetupResults(data);
+    setWorldSetupResults({
+      ...data,
+      narratorId: selectedNarrator ?? DEFAULT_NARRATOR_ID,
+    });
     setPhase('CYOA_STORY');
   };
 
@@ -161,6 +169,7 @@ function App() {
     // Combine world setup data with character data, ensuring name is preserved
     const finalCharacter = {
       ...data,
+      narratorId: selectedNarrator ?? worldSetupResults?.narratorId ?? DEFAULT_NARRATOR_ID,
       name: worldSetupResults?.name || '쵸붕이',
       epithet: epithet,
       worldSetup: worldSetupResults
@@ -206,6 +215,7 @@ function App() {
     if (saveData) {
       setCharacterData({ ...saveData.characterData, name: saveData.characterName });
       setWorldSetupResults(saveData.characterData.worldSetup || null);
+      setSelectedNarrator(saveData.characterData.narratorId || saveData.characterData.worldSetup?.narratorId || DEFAULT_NARRATOR_ID);
       setPhase('CHARACTER_SHEET');
     }
   };
@@ -213,6 +223,7 @@ function App() {
   const handleImportCharacter = (saveData: SaveData) => {
     setCharacterData({ ...saveData.characterData, name: saveData.characterName });
     setWorldSetupResults(saveData.characterData.worldSetup || null);
+    setSelectedNarrator(saveData.characterData.narratorId || saveData.characterData.worldSetup?.narratorId || DEFAULT_NARRATOR_ID);
     setPhase('CHARACTER_SHEET');
   };
 
@@ -234,6 +245,7 @@ function App() {
 
     const devCharacter = createDevCharacterData();
 
+    setSelectedNarrator(devCharacter.narratorId);
     setWorldSetupResults(devCharacter.worldSetup);
     if (targetPhase === 'REWARD_STORY' || targetPhase === 'REWARD_SELECT' || targetPhase === 'CHARACTER_SHEET' || targetPhase === 'LOCATION_CUTSCENE') {
       setCharacterData(devCharacter);
@@ -243,7 +255,7 @@ function App() {
 
 
   return (
-    <div className="app-container">
+    <div className="app-container" style={narratorThemeStyle}>
       {notification && (
         <Toast
           message={notification.message}
@@ -325,6 +337,7 @@ function App() {
         {phase === 'WORLD_SETUP' && (
           <WorldSetup
             onComplete={handleWorldSetupComplete}
+            narratorId={selectedNarrator}
             initialData={worldSetupResults ? {
               name: worldSetupResults.name,
               selections: worldSetupResults.rawSelections,
@@ -344,6 +357,7 @@ function App() {
           <VioletDeckCYOA
             onComplete={handleCYOAComplete}
             onBack={handleBackToWorldSetup}
+            narratorId={selectedNarrator ?? worldSetupResults?.narratorId}
             worldSetupBonus={worldSetupResults?.points || 0}
             worldSetupTags={[
               ...(worldSetupResults?.tags || []),
@@ -369,6 +383,7 @@ function App() {
         {phase === 'REWARD_SELECT' && characterData && (
           <RewardSelect
             onComplete={handleRewardSelectComplete}
+            narratorId={selectedNarrator ?? characterData.narratorId ?? worldSetupResults?.narratorId}
             initialData={rewardSelectResults ? {
               name: rewardSelectResults.name,
               selections: rewardSelectResults.rawSelections,

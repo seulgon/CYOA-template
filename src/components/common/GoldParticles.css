@@ -8,24 +8,24 @@
 
 .gold-particle {
     position: absolute;
-    background-color: #f7da91;
+    background-color: var(--narrator-accent-strong, #f7da91);
     border-radius: 50%;
     box-shadow: 
-        0 0 10px 2px rgba(247, 218, 145, 0.7), 
-        0 0 20px 5px rgba(235, 192, 80, 0.3),
+        0 0 10px 2px rgba(var(--narrator-accent-strong-rgb), 0.7), 
+        0 0 20px 5px rgba(var(--narrator-accent-rgb), 0.3),
         inset 0 0 4px rgba(255, 255, 255, 0.8);
     will-change: transform, opacity;
     animation: gold-twinkle ease-in-out infinite;
 }
 
 .intensity-low .gold-particle {
-    box-shadow: 0 0 8px 1px rgba(247, 218, 145, 0.5);
+    box-shadow: 0 0 8px 1px rgba(var(--narrator-accent-strong-rgb), 0.5);
 }
 
 .intensity-high .gold-particle {
     box-shadow: 
-        0 0 15px 3px rgba(247, 218, 145, 0.8), 
-        0 0 30px 8px rgba(235, 192, 80, 0.4),
+        0 0 15px 3px rgba(var(--narrator-accent-strong-rgb), 0.8), 
+        0 0 30px 8px rgba(var(--narrator-accent-rgb), 0.4),
         inset 0 0 6px rgba(255, 255, 255, 0.9);
 }
 

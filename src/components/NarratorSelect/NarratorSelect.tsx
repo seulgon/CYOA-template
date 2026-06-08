@@ -4,78 +4,42 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import './NarratorSelect.css';
 import GoldParticles from '../common/GoldParticles';
 import { gameImagePreloader } from '../../utils/imagePreloader';
-
-interface NarratorChoice {
-    id: string;
-    name: string;
-    description: string;
-    image: string;
-}
-
-const NARRATORS: NarratorChoice[] = [
-    {
-        id: "angel",
-        name: "천사",
-        description: "빛과 정의를 대변하는 천상계의 존재. 숭고하고 영광스러운 길로 당신을 이끕니다.",
-        image: "./assets/images/narrators/angel/angel.webp"
-    },
-    {
-        id: "demon",
-        name: "악마",
-        description: "심연 and 탐욕의 화신인 마계의 군주. 달콤한 파멸과 강력한 힘의 계약을 제안합니다.",
-        image: "./assets/images/narrators/demon/demon.webp"
-    },
-    {
-        id: "mountain_spirit",
-        name: "산신령",
-        description: "이 땅을 조용히 수호해 온 유구한 정령. 온화하고 지혜로운 충고로 갈 길을 일깨워 줍니다.",
-        image: "./assets/images/narrators/mountain_spirit/mountain_spirit.webp"
-    },
-    {
-        id: "vengeful_spirit",
-        name: "원령",
-        description: "깊은 원한과 미련으로 뭉쳐진 고독한 혼백. 뒤틀린 인과와 피의 복수를 속삭입니다.",
-        image: "./assets/images/narrators/vengeful_spirit/vengeful_spirit.webp"
-    },
-    {
-        id: "ai_avatar",
-        name: "초지능 AI",
-        description: "시공간의 잔재로 이루어진 인공지능 아바타. 냉철하고 객관적인 시선으로 당신의 여정을 기록합니다.",
-        image: "./assets/images/narrators/ai_avatar/ai_avatar.webp"
-    }
-];
+import { getNarratorThemeVariables, NARRATOR_PROFILES, type NarratorId } from '../../data/narrators';
 
 interface NarratorSelectProps {
-    onComplete: (narratorId: string) => void;
+    onComplete: (narratorId: NarratorId) => void;
     onBack: () => void;
-    initialNarrator?: string;
+    initialNarrator?: string | null;
 }
 
 const NarratorSelect: React.FC<NarratorSelectProps> = ({ onComplete, onBack, initialNarrator }) => {
     const [selectedId, setSelectedId] = useState<string | null>(initialNarrator || null);
 
     useEffect(() => {
-        const urls = NARRATORS.map(n => n.image);
+        const urls = NARRATOR_PROFILES.map(n => n.portraitImage);
         gameImagePreloader.enqueue(urls, { priority: true });
     }, []);
 
-    const handleSelect = (id: string) => {
+    const handleSelect = (id: NarratorId) => {
         setSelectedId(id);
     };
 
-    const handleDoubleClick = (id: string) => {
+    const handleDoubleClick = (id: NarratorId) => {
         setSelectedId(id);
         onComplete(id);
     };
 
     const handleComplete = () => {
         if (selectedId) {
-            onComplete(selectedId);
+            onComplete(selectedId as NarratorId);
         }
     };
 
     return (
-        <div className="narrator-select-overlay">
+        <div
+            className="narrator-select-overlay"
+            style={selectedId ? getNarratorThemeVariables(selectedId) as React.CSSProperties : undefined}
+        >
             <div className="narrator-select-scene-frame">
                 <div className="narrator-select-stage" aria-hidden="true">
                     <img
@@ -107,7 +71,7 @@ const NarratorSelect: React.FC<NarratorSelectProps> = ({ onComplete, onBack, ini
                             },
                         }}
                     >
-                        {NARRATORS.map(narrator => {
+                        {NARRATOR_PROFILES.map(narrator => {
                             const isSelected = selectedId === narrator.id;
 
                             return (
@@ -133,7 +97,7 @@ const NarratorSelect: React.FC<NarratorSelectProps> = ({ onComplete, onBack, ini
                                 >
                                     <div className="narrator-image-container">
                                         <img
-                                            src={narrator.image}
+                                            src={narrator.portraitImage}
                                             alt={narrator.name}
                                             className="narrator-image"
                                             loading="lazy"

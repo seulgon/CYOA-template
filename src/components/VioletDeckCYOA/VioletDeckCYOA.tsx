@@ -13,19 +13,22 @@ import '../CYOABuilder/CYOABuilder.css';
 import './VioletDeckCYOA.css';
 import GoldParticles from '../common/GoldParticles';
 import { gameImagePreloader } from '../../utils/imagePreloader';
+import { getNarratorProfile } from '../../data/narrators';
 
 import DialogueBox from '../common/DialogueBox/DialogueBox';
 
 interface VioletDeckCYOAProps extends CYOABuilderProps {
   onBack?: () => void;
+  narratorId?: string | null;
 }
 
 const MotionDialogueBox = motion(DialogueBox);
 
-const VioletDeckCYOA = ({ onBack, ...builderProps }: VioletDeckCYOAProps) => {
+const VioletDeckCYOA = ({ onBack, narratorId, ...builderProps }: VioletDeckCYOAProps) => {
   const cardTableRef = useRef<HTMLElement>(null);
   const [dialogueText, setDialogueText] = useState<string | null>(null);
   const [dialogueRequirements, setDialogueRequirements] = useState<string | null>(null);
+  const narrator = getNarratorProfile(narratorId);
   const builder = useCYOABuilder(builderProps);
 
   const activeSection = builder.activeSection ?? initialCYOAData.sections[0];
@@ -44,12 +47,16 @@ const VioletDeckCYOA = ({ onBack, ...builderProps }: VioletDeckCYOAProps) => {
   };
 
   useEffect(() => {
-    const urls = activeSection.choices
+    const urls = [
+      narrator.standingImage,
+      narrator.tableImage,
+      ...activeSection.choices
       .flatMap(choice => [choice.image, choice.selectedImage])
-      .filter((url): url is string => Boolean(url));
+      .filter((url): url is string => Boolean(url)),
+    ];
 
     gameImagePreloader.enqueue(urls, { priority: true });
-  }, [activeSection]);
+  }, [activeSection, narrator.standingImage, narrator.tableImage]);
 
   const choiceGroups = (() => {
     const ungroupedChoices: Choice[] = [];
@@ -166,12 +173,12 @@ const VioletDeckCYOA = ({ onBack, ...builderProps }: VioletDeckCYOAProps) => {
           />
           <img
             className="violet-stage-narrator"
-            src="./assets/images/intro/violet_standing_dark_clear.png"
+            src={narrator.standingImage}
             alt=""
           />
           <img
             className="violet-stage-table"
-            src="./assets/images/stage/red_silk_table.png"
+            src={narrator.tableImage}
             alt=""
           />
         </div>
@@ -201,7 +208,7 @@ const VioletDeckCYOA = ({ onBack, ...builderProps }: VioletDeckCYOAProps) => {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-            name="바이올렛"
+            name={narrator.name}
             text={displayedDialogue}
             requirements={dialogueRequirements ? `${dialogueRequirements}에 대한 선택을 더 해야해.` : null}
             glow={true}

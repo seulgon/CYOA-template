@@ -138,16 +138,16 @@ const ChoiceCard: React.FC<ChoiceCardProps> = ({
                     className={`choice-card card-face card-front ${isSelected ? 'selected' : ''} ${disabled ? 'disabled' : ''}`}
                     style={{
                         border: isSelected
-                            ? '2px solid rgba(235, 192, 80, 0.95)'
-                            : '2px solid rgba(235, 192, 80, 0.4)',
+                            ? '2px solid rgba(var(--narrator-accent-rgb), 0.95)'
+                            : '2px solid rgba(var(--narrator-accent-rgb), 0.4)',
                         borderRadius: '12px',
                         background: isSelected
-                            ? 'linear-gradient(135deg, rgba(235, 192, 80, 0.12) 0%, rgba(255, 215, 0, 0.08) 50%, rgba(235, 192, 80, 0.12) 100%)'
+                            ? 'linear-gradient(135deg, rgba(var(--narrator-accent-rgb), 0.12) 0%, rgba(var(--narrator-accent-strong-rgb), 0.08) 50%, rgba(var(--narrator-accent-rgb), 0.12) 100%)'
                             : 'rgba(255, 255, 255, 0.03)',
                         backdropFilter: isSelected ? 'blur(14px)' : 'blur(8px)',
                         WebkitBackdropFilter: isSelected ? 'blur(14px)' : 'blur(8px)',
                         boxShadow: isSelected
-                            ? '0 0 15px rgba(235, 192, 80, 0.5), 0 0 30px rgba(235, 192, 80, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                            ? '0 0 15px rgba(var(--narrator-accent-rgb), 0.5), 0 0 30px rgba(var(--narrator-accent-rgb), 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                             : '0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                         cursor: disabled ? 'not-allowed' : (isStatAdjustmentCard ? 'default' : 'pointer'),
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -333,7 +333,7 @@ const ChoiceCard: React.FC<ChoiceCardProps> = ({
                                                 <div style={{
                                                     marginTop: '0.8rem',
                                                     padding: '0.5rem',
-                                                    background: 'rgba(235, 192, 80, 0.1)',
+                                                    background: 'rgba(var(--narrator-accent-rgb), 0.1)',
                                                     borderRadius: '4px',
                                                     borderLeft: '3px solid var(--accent-color)'
                                                 }}>
@@ -347,9 +347,9 @@ const ChoiceCard: React.FC<ChoiceCardProps> = ({
                                                 <div style={{
                                                     marginTop: '0.5rem',
                                                     padding: '0.5rem',
-                                                    background: 'rgba(235, 192, 80, 0.05)',
+                                                    background: 'rgba(var(--narrator-accent-rgb), 0.05)',
                                                     borderRadius: '4px',
-                                                    border: '1px solid rgba(235, 192, 80, 0.3)',
+                                                    border: '1px solid rgba(var(--narrator-accent-rgb), 0.3)',
                                                     overflow: 'hidden'
                                                 }}>
                                                     <div style={{ 
@@ -386,16 +386,16 @@ const ChoiceCard: React.FC<ChoiceCardProps> = ({
                     className={`choice-card card-face card-back ${isSelected ? 'selected' : ''} ${disabled ? 'disabled' : ''}`}
                     style={{
                         border: isSelected
-                            ? '2px solid rgba(235, 192, 80, 0.95)'
-                            : '2px solid rgba(235, 192, 80, 0.4)',
+                            ? '2px solid rgba(var(--narrator-accent-rgb), 0.95)'
+                            : '2px solid rgba(var(--narrator-accent-rgb), 0.4)',
                         borderRadius: '12px',
                         background: isSelected
-                            ? 'linear-gradient(135deg, rgba(235, 192, 80, 0.12) 0%, rgba(255, 215, 0, 0.08) 50%, rgba(235, 192, 80, 0.12) 100%)'
+                            ? 'linear-gradient(135deg, rgba(var(--narrator-accent-rgb), 0.12) 0%, rgba(var(--narrator-accent-strong-rgb), 0.08) 50%, rgba(var(--narrator-accent-rgb), 0.12) 100%)'
                             : 'rgba(255, 255, 255, 0.03)',
                         backdropFilter: isSelected ? 'blur(14px)' : 'blur(8px)',
                         WebkitBackdropFilter: isSelected ? 'blur(14px)' : 'blur(8px)',
                         boxShadow: isSelected
-                            ? '0 0 15px rgba(235, 192, 80, 0.5), 0 0 30px rgba(235, 192, 80, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+                            ? '0 0 15px rgba(var(--narrator-accent-rgb), 0.5), 0 0 30px rgba(var(--narrator-accent-rgb), 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                             : '0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                         padding: '1rem',
                         boxSizing: 'border-box',

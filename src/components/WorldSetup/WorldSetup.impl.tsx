@@ -6,6 +6,7 @@ import TagTooltip from '../common/TagTooltip';
 import ChoiceLightbox from '../CYOABuilder/ChoiceLightbox';
 import GoldParticles from '../common/GoldParticles';
 import { gameImagePreloader } from '../../utils/imagePreloader';
+import { getNarratorProfile } from '../../data/narrators';
 
 interface WorldSetupChoice {
     id: string;
@@ -39,7 +40,7 @@ const worldSetupData: WorldSetupSection[] = [
         question: "이 단계는 CYOA의 세계관 설정이나 기초 조율을 위한 단계입니다. 단일 선택(Single-select) 카드 UI의 예시를 아래에서 체험해 보세요.",
         choices: [
             { id: "inviter_collision", name: "차원 충돌", description: "이 카드는 단일 선택 카드의 대표적인 예시입니다. 선택 시 '차원충돌' 태그가 인벤토리에 실시간으로 추가됩니다.", comment: "이 카드는 단일 선택 카드의 대표적인 예시입니다. 선택 시 '차원충돌' 태그가 인벤토리에 실시간으로 추가됩니다.", tags: ["차원충돌"], epithetPart: "우연히 도착한", image: "./assets/images/worldsetup/inviter_collision.webp" },
-            { id: "inviter_wish", name: "누군가의 소망", description: "카드를 클릭하면 바이올렛 대사창의 텍스트가 해당 카드의 세부 설명으로 실시간 변경되는 것을 볼 수 있습니다.", comment: "카드를 클릭하면 바이올렛 대사창의 텍스트가 해당 카드의 세부 설명으로 실시간 변경되는 것을 볼 수 있습니다.", tags: ["누군가의_소망"], epithetPart: "소망받은", image: "./assets/images/worldsetup/inviter_wish.webp" },
+            { id: "inviter_wish", name: "누군가의 소망", description: "카드를 클릭하면 나레이터 대사창의 텍스트가 해당 카드의 세부 설명으로 실시간 변경되는 것을 볼 수 있습니다.", comment: "카드를 클릭하면 나레이터 대사창의 텍스트가 해당 카드의 세부 설명으로 실시간 변경되는 것을 볼 수 있습니다.", tags: ["누군가의_소망"], epithetPart: "소망받은", image: "./assets/images/worldsetup/inviter_wish.webp" },
             { id: "inviter_ritual", name: "소환 의식", description: "선택된 카드는 금색 테두리와 체크 마크 효과가 적용되어 사용자에게 확실한 시각적 피드백을 전달합니다.", comment: "선택된 카드는 금색 테두리와 체크 마크 효과가 적용되어 사용자에게 확실한 시각적 피드백을 전달합니다.", tags: ["소환의식"], epithetPart: "소환된", image: "./assets/images/worldsetup/inviter_ritual.webp" },
             { id: "inviter_pantheon", name: "만신전", description: "각 카드는 이미지와 타이틀, 그리고 하단의 고유 태그들로 구조화되어 있어 정돈된 느낌을 줍니다.", comment: "각 카드는 이미지와 타이틀, 그리고 하단의 고유 태그들로 구조화되어 있어 정돈된 느낌을 줍니다.", tags: ["초대받은_자"], epithetPart: "초대받은", image: "./assets/images/worldsetup/inviter_pantheon.webp" },
             { id: "inviter_elder", name: "고대신 ▣▤◆▩", description: "오른쪽 하단의 '+' 아이콘을 누르면 이미지 라이트박스(확대) 모달이 띄워지는 애니메이션을 확인할 수 있습니다.", comment: "오른쪽 하단의 '+' 아이콘을 누르면 이미지 라이트박스(확대) 모달이 띄워지는 애니메이션을 확인할 수 있습니다.", tags: ["◆▩의_관심"], epithetPart: "부름받은", image: "./assets/images/worldsetup/inviter_elder.webp" }
@@ -49,10 +50,12 @@ const worldSetupData: WorldSetupSection[] = [
 interface WorldSetupProps {
     onComplete: (data: { name: string; points: number; choices: string[]; tags: string[]; rawSelections: Record<string, string>; lastStep: number }) => void;
     initialData?: { name: string; selections: Record<string, string>; startStep: number };
+    narratorId?: string | null;
 }
 
-const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData }) => {
+const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narratorId }) => {
     const cardTableRef = useRef<HTMLElement>(null);
+    const narrator = getNarratorProfile(narratorId);
     const [currentStep, setCurrentStep] = useState(initialData?.startStep ?? 0);
     const [selections, setSelections] = useState<Record<string, string>>(
         initialData?.selections ?? {}
@@ -118,12 +121,16 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData }) => {
         : selections[section.id] !== undefined;
 
     useEffect(() => {
-        const urls = section.choices
+        const urls = [
+            narrator.standingImage,
+            narrator.tableImage,
+            ...(section.choices
             ?.map(choice => choice.image)
-            .filter((url): url is string => Boolean(url)) ?? [];
+            .filter((url): url is string => Boolean(url)) ?? []),
+        ];
 
         gameImagePreloader.enqueue(urls, { priority: true });
-    }, [section]);
+    }, [narrator.standingImage, narrator.tableImage, section]);
 
     return (
         <div className="world-setup-overlay">
@@ -144,12 +151,12 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData }) => {
                     />
                     <img
                         className="world-setup-stage-narrator"
-                        src="./assets/images/intro/violet_standing_dark_clear.png"
+                        src={narrator.standingImage}
                         alt=""
                     />
                     <img
                         className="world-setup-stage-table"
-                        src="./assets/images/stage/red_silk_table.png"
+                        src={narrator.tableImage}
                         alt=""
                     />
                 </div>
@@ -171,7 +178,7 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData }) => {
                     >
                         <div className="world-setup-dialogue-copy">
                             <div className="world-setup-dialogue-header">
-                                <span className="world-setup-dialogue-name">바이올렛</span>
+                                <span className="world-setup-dialogue-name">{narrator.name}</span>
                                 <div className="world-setup-name-underline" />
                             </div>
                             <p>{displayedDialogue}</p>

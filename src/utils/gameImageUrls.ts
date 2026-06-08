@@ -1,5 +1,6 @@
 import { CUTSCENE_DATA } from '../data/cutscenes/cutsceneData';
 import { initialCYOAData } from '../data/cyoa';
+import { getNarratorImageUrls } from '../data/narrators';
 import { normalizeImageUrl } from './imagePreloader';
 
 export const CRITICAL_IMAGE_URLS = [
@@ -11,7 +12,6 @@ export const CRITICAL_IMAGE_URLS = [
 
 const STAGE_LAYER_URLS = [
   './assets/images/intro/violet_standing_dark_clear.png',
-  './assets/images/stage/red_silk_table.png',
 ];
 
 const STAGE_BACKGROUND_URLS = {
@@ -63,6 +63,7 @@ export const getAllGameImageUrls = (): string[] => (
     ...CRITICAL_IMAGE_URLS,
     ...Object.values(STAGE_BACKGROUND_URLS),
     ...STAGE_LAYER_URLS,
+    ...getNarratorImageUrls(),
     ...getCutsceneImageUrls(),
     ...getCyoaImageUrls(),
   ])
@@ -83,12 +84,14 @@ export const getPhaseImageUrls = (phase: string): string[] => {
       return uniqueUrls([
         STAGE_BACKGROUND_URLS.boonLibrary,
         ...STAGE_LAYER_URLS,
+        ...getNarratorImageUrls(),
         ...getFirstCyoaSectionImageUrls(),
       ]);
     case 'WORLD_SETUP':
       return uniqueUrls([
         STAGE_BACKGROUND_URLS.timeline,
         ...STAGE_LAYER_URLS,
+        ...getNarratorImageUrls(),
       ]);
     case 'LOCATION_CUTSCENE':
       return getCutsceneImageUrls('LOCATION_CUTSCENE');
@@ -96,6 +99,7 @@ export const getPhaseImageUrls = (phase: string): string[] => {
       return uniqueUrls([
         STAGE_BACKGROUND_URLS.rewardTreasure,
         ...STAGE_LAYER_URLS,
+        ...getNarratorImageUrls(),
       ]);
     default:
       return [];

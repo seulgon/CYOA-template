@@ -1,7 +1,7 @@
 .narrator-select-overlay {
-  --world-gold: #d9b768;
-  --world-gold-strong: #f7da91;
-  --world-line: rgba(247, 218, 145, 0.46);
+  --world-gold: var(--narrator-accent, #d9b768);
+  --world-gold-strong: var(--narrator-accent-strong, #f7da91);
+  --world-line: rgba(var(--narrator-accent-strong-rgb), 0.46);
   position: fixed;
   inset: 0;
   z-index: 1200;
@@ -69,7 +69,7 @@
   font-weight: 900;
   letter-spacing: 0.15rem;
   margin: 0 0 0.5rem;
-  text-shadow: 0 0 15px rgba(247, 218, 145, 0.45);
+  text-shadow: 0 0 15px rgba(var(--narrator-accent-strong-rgb), 0.45);
 }
 
 .narrator-select-title-sub {
@@ -95,7 +95,7 @@
   overflow-y: auto;
   padding: 24px calc(6% + 12px);
   scrollbar-width: thin;
-  scrollbar-color: rgba(247, 218, 145, 0.34) transparent;
+  scrollbar-color: rgba(var(--narrator-accent-strong-rgb), 0.34) transparent;
 }
 
 .narrator-select-card-table::-webkit-scrollbar {
@@ -108,7 +108,7 @@
 
 .narrator-select-card-table::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgba(247, 218, 145, 0.34);
+  background: rgba(var(--narrator-accent-strong-rgb), 0.34);
 }
 
 .narrator-select-grid {
@@ -128,7 +128,7 @@
   display: flex;
   flex-direction: column;
   padding: 0;
-  border: 1px solid rgba(247, 218, 145, 0.25);
+  border: 1px solid rgba(var(--narrator-accent-strong-rgb), 0.25);
   border-radius: 10px;
   color: inherit;
   background:
@@ -163,11 +163,11 @@
 .narrator-choice-item.selected {
   border-color: var(--world-gold-strong);
   background:
-    linear-gradient(135deg, rgba(235, 192, 80, 0.28), rgba(255, 215, 0, 0.16), rgba(235, 192, 80, 0.24)),
+    linear-gradient(135deg, rgba(var(--narrator-accent-rgb), 0.28), rgba(var(--narrator-accent-strong-rgb), 0.16), rgba(var(--narrator-accent-rgb), 0.24)),
     rgba(12, 12, 18, 0.2);
   box-shadow:
-    0 0 18px rgba(235, 192, 80, 0.55),
-    0 0 35px rgba(235, 192, 80, 0.35),
+    0 0 18px rgba(var(--narrator-accent-rgb), 0.55),
+    0 0 35px rgba(var(--narrator-accent-rgb), 0.35),
     0 20px 40px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
@@ -180,7 +180,7 @@
       linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02)),
       rgba(20, 20, 28, 0.5);
     box-shadow:
-      0 0 15px rgba(235, 192, 80, 0.35),
+      0 0 15px rgba(var(--narrator-accent-rgb), 0.35),
       0 22px 45px rgba(0, 0, 0, 0.55),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
@@ -192,7 +192,7 @@
   aspect-ratio: 4/5;
   overflow: hidden;
   background: #050305;
-  border-bottom: 1px solid rgba(247, 218, 145, 0.2);
+  border-bottom: 1px solid rgba(var(--narrator-accent-strong-rgb), 0.2);
   border-radius: 9px 9px 0 0;
 }
 
@@ -256,7 +256,7 @@
   gap: 1rem;
   min-height: 58px;
   padding: 0.5rem 2.5rem;
-  border-top: 1px solid rgba(247, 218, 145, 0.24);
+  border-top: 1px solid rgba(var(--narrator-accent-strong-rgb), 0.24);
   background: rgba(5, 3, 7, 0.82);
   box-shadow: 0 -12px 34px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(14px);
@@ -307,7 +307,7 @@
 
 .narrator-nav-button.back {
   justify-self: start;
-  border: 1px solid rgba(247, 218, 145, 0.34);
+  border: 1px solid rgba(var(--narrator-accent-strong-rgb), 0.34);
   color: rgba(255, 247, 232, 0.78);
   background: rgba(0, 0, 0, 0.34);
 }
@@ -317,7 +317,7 @@
   border: 1px solid var(--accent-color);
   color: #090509;
   background: var(--accent-color);
-  box-shadow: 0 0 18px rgba(235, 192, 80, 0.26);
+  box-shadow: 0 0 18px rgba(var(--narrator-accent-rgb), 0.26);
 }
 
 @media (hover: hover) {
@@ -326,7 +326,7 @@
   }
 
   .narrator-nav-button.back:hover:not(:disabled) {
-    border-color: rgba(247, 218, 145, 0.72);
+    border-color: rgba(var(--narrator-accent-strong-rgb), 0.72);
     color: #fff7e8;
     background: rgba(20, 12, 18, 0.68);
   }
@@ -396,6 +396,6 @@
   }
   .narrator-choice-item.selected {
     background: rgba(34, 31, 24, 0.94) !important;
-    box-shadow: 0 0 0 1px rgba(247, 218, 145, 0.44), 0 8px 18px rgba(0, 0, 0, 0.44) !important;
+    box-shadow: 0 0 0 1px rgba(var(--narrator-accent-strong-rgb), 0.44), 0 8px 18px rgba(0, 0, 0, 0.44) !important;
   }
 }

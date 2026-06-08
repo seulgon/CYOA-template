@@ -7,10 +7,10 @@
   box-sizing: border-box;
   overflow: hidden;
   border-style: solid;
-  border-color: rgba(212, 175, 55, 0.3);
+  border-color: rgba(var(--narrator-accent-rgb), 0.3);
   border-radius: 6px;
   background: linear-gradient(135deg, rgba(15, 15, 25, 0.45) 0%, rgba(5, 5, 15, 0.55) 100%);
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(212, 175, 55, 0.05);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(var(--narrator-accent-rgb), 0.05);
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
   transition: all 0.3s ease;
@@ -20,7 +20,7 @@
 
 /* 글로우 효과 추가 */
 .common-dialogue-box.has-glow {
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4), 0 0 12px rgba(212, 175, 55, 0.2), inset 0 0 30px rgba(212, 175, 55, 0.05);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4), 0 0 12px rgba(var(--narrator-accent-rgb), 0.2), inset 0 0 30px rgba(var(--narrator-accent-rgb), 0.05);
 }
 
 .dialogue-box-copy {
@@ -47,7 +47,7 @@
   font-weight: 700;
   letter-spacing: 0.1rem;
   line-height: 1.2;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  text-shadow: 0 0 15px rgba(var(--narrator-accent-rgb), 0.4);
 }
 
 .dialogue-box-name-underline {
@@ -79,7 +79,7 @@
   line-height: 1.55;
   word-break: keep-all;
   scrollbar-width: thin;
-  scrollbar-color: rgba(212, 175, 55, 0.42) transparent;
+  scrollbar-color: rgba(var(--narrator-accent-rgb), 0.42) transparent;
 }
 
 /* 스크롤바 커스터마이징 */
@@ -93,7 +93,7 @@
 
 .dialogue-box-text::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgba(212, 175, 55, 0.42);
+  background: rgba(var(--narrator-accent-rgb), 0.42);
 }
 
 .dialogue-box-requirements {

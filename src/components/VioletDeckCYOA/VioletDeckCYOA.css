@@ -1,8 +1,8 @@
 .violet-deck-cyoa {
-  --violet-gold: #d9b768;
-  --violet-gold-strong: #f7da91;
-  --violet-ink: #050307;
-  --violet-line: rgba(247, 218, 145, 0.48);
+  --violet-gold: var(--narrator-accent, #d9b768);
+  --violet-gold-strong: var(--narrator-accent-strong, #f7da91);
+  --violet-ink: var(--narrator-ink, #050307);
+  --violet-line: rgba(var(--narrator-accent-strong-rgb), 0.48);
   position: fixed;
   inset: 0;
   z-index: 1200;
@@ -81,7 +81,7 @@
 .violet-back-button {
   position: absolute;
   z-index: 8;
-  border: 1px solid rgba(247, 218, 145, 0.44);
+  border: 1px solid rgba(var(--narrator-accent-strong-rgb), 0.44);
   border-radius: 8px;
   color: var(--violet-gold-strong);
   background: rgba(5, 3, 7, 0.58);
@@ -180,7 +180,7 @@
   border-radius: 8px;
   color: #000;
   background: var(--accent-color);
-  box-shadow: 0 0 18px rgba(235, 192, 80, 0.26), 0 10px 24px rgba(0, 0, 0, 0.26);
+  box-shadow: 0 0 18px rgba(var(--narrator-accent-rgb), 0.26), 0 10px 24px rgba(0, 0, 0, 0.26);
   font-size: 1.25rem;
   font-weight: 900;
   transition: all 0.2s;
@@ -197,7 +197,7 @@
 
 @media (hover: hover) {
   .violet-back-button:hover {
-    border-color: rgba(247, 218, 145, 0.82);
+    border-color: rgba(var(--narrator-accent-strong-rgb), 0.82);
     background: rgba(40, 16, 24, 0.72);
   }
 }
@@ -237,7 +237,7 @@
   overflow-y: auto;
   padding: calc(37.8dvh + 18px) calc(13.2% + 12px) 42px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(247, 218, 145, 0.34) transparent;
+  scrollbar-color: rgba(var(--narrator-accent-strong-rgb), 0.34) transparent;
 }
 
 .violet-choice-group {
@@ -248,8 +248,8 @@
 .violet-choice-group-title {
   margin: 0;
   padding: 0 0 8px 12px;
-  border-bottom: 1px solid rgba(247, 218, 145, 0.26);
-  border-left: 3px solid rgba(247, 218, 145, 0.72);
+  border-bottom: 1px solid rgba(var(--narrator-accent-strong-rgb), 0.26);
+  border-left: 3px solid rgba(var(--narrator-accent-strong-rgb), 0.72);
   color: rgba(255, 247, 232, 0.88);
   font-size: clamp(0.86rem, 1.5vw, 1.1rem);
   line-height: 1.1;
@@ -269,7 +269,7 @@
   justify-content: space-between;
   gap: 16px;
   padding: 10px 0 4px;
-  border-top: 1px solid rgba(247, 218, 145, 0.18);
+  border-top: 1px solid rgba(var(--narrator-accent-strong-rgb), 0.18);
 }
 
 .violet-card-section-nav button {
@@ -288,7 +288,7 @@
   .violet-card-section-nav button:hover {
     transform: translateY(-2px);
     border-color: var(--accent-hover);
-    background: rgba(20, 12, 18, 0.68);
+    background: rgba(var(--narrator-panel-rgb), 0.68);
   }
 }
 
@@ -322,18 +322,18 @@
 .violet-card-table .choice-card.card-face {
   isolation: auto !important;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012)),
-    rgba(12, 12, 18, 0.2) !important;
-  backdrop-filter: blur(12px) saturate(1.1) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
+    linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+    rgba(var(--narrator-panel-rgb), 0.44) !important;
+  backdrop-filter: blur(18px) saturate(1.22) brightness(0.9) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.22) brightness(0.9) !important;
 }
 
 .violet-card-table .choice-card.card-face.selected {
   background:
-    linear-gradient(135deg, rgba(235, 192, 80, 0.18), rgba(255, 215, 0, 0.08), rgba(235, 192, 80, 0.14)),
-    rgba(12, 12, 18, 0.15) !important;
-  backdrop-filter: blur(12px) saturate(1.1) !important;
-  -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
+    linear-gradient(135deg, rgba(var(--narrator-accent-rgb), 0.2), rgba(255, 255, 255, 0.045), rgba(var(--narrator-accent-rgb), 0.14)),
+    rgba(var(--narrator-panel-rgb), 0.5) !important;
+  backdrop-filter: blur(18px) saturate(1.25) brightness(0.92) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.25) brightness(0.92) !important;
 }
 
 .violet-card-table .choice-card.card-face::before {
@@ -342,9 +342,11 @@
   inset: 0;
   z-index: 0;
   border-radius: inherit;
-  background: rgba(10, 10, 14, 0.08);
-  backdrop-filter: blur(12px) saturate(1.1);
-  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 28%),
+    linear-gradient(180deg, transparent 32%, rgba(3, 3, 6, 0.2) 100%);
+  backdrop-filter: blur(10px) saturate(1.08);
+  -webkit-backdrop-filter: blur(10px) saturate(1.08);
   pointer-events: none;
 }
 
@@ -354,8 +356,17 @@
 }
 
 .violet-card-table .card-content-inner {
-  background: transparent;
+  background: linear-gradient(180deg, rgba(5, 5, 10, 0.08), rgba(5, 5, 10, 0.2));
   border-top: 0;
+}
+
+.violet-card-table .choice-card-title {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.72);
+}
+
+.violet-card-table .choice-card-description {
+  color: rgba(240, 240, 240, 0.74) !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.62);
 }
 
 .violet-card-table .choice-card.card-front > div[style*="margin-bottom"] {
@@ -379,7 +390,7 @@
 
 .violet-card-table::-webkit-scrollbar-thumb {
   border-radius: 999px;
-  background: rgba(247, 218, 145, 0.34);
+  background: rgba(var(--narrator-accent-strong-rgb), 0.34);
 }
 
 .violet-card-section-tabs {
@@ -414,9 +425,9 @@
 
 @media (hover: hover) {
   .violet-card-section-tabs button:hover:not(.active) {
-    border-color: rgba(247, 218, 145, 0.52);
+    border-color: rgba(var(--narrator-accent-strong-rgb), 0.52);
     color: #fff7e8;
-    background: rgba(20, 12, 18, 0.62);
+    background: rgba(var(--narrator-panel-rgb), 0.62);
   }
 }
 
@@ -436,7 +447,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(247, 218, 145, 0.36);
+  border: 1px solid rgba(var(--narrator-accent-strong-rgb), 0.36);
   border-radius: 999px;
   color: var(--accent-color);
   background: rgba(8, 5, 10, 0.58);
@@ -449,7 +460,7 @@
   .violet-scroll-btn:hover {
     transform: translateY(-2px);
     border-color: var(--accent-hover);
-    background: rgba(20, 12, 18, 0.72);
+    background: rgba(var(--narrator-panel-rgb), 0.72);
   }
 }
 
@@ -596,7 +607,7 @@
 
   .violet-card-table .choice-card.card-face.selected {
     background: rgba(34, 31, 24, 0.9) !important;
-    box-shadow: 0 0 0 1px rgba(247, 218, 145, 0.44), 0 8px 18px rgba(0, 0, 0, 0.44) !important;
+    box-shadow: 0 0 0 1px rgba(var(--narrator-accent-strong-rgb), 0.44), 0 8px 18px rgba(0, 0, 0, 0.44) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }

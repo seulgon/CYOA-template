@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import './RewardSelect.css';
+import '../WorldSetup/WorldSetup.css';
 import TagTooltip from '../common/TagTooltip';
 import ChoiceLightbox from '../CYOABuilder/ChoiceLightbox';
 import GoldParticles from '../common/GoldParticles';
 import { gameImagePreloader } from '../../utils/imagePreloader';
+import { getNarratorProfile } from '../../data/narrators';
 
 interface RewardChoice {
     id: string;
@@ -40,10 +41,12 @@ const rewardSelectData: RewardSection[] = [
 interface RewardSelectProps {
     onComplete: (data: { name: string; points: number; choices: string[]; tags: string[]; rawSelections: Record<string, string>; lastStep: number }) => void;
     initialData?: { name: string; selections: Record<string, string>; startStep: number };
+    narratorId?: string | null;
 }
 
-const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData }) => {
+const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData, narratorId }) => {
     const cardTableRef = useRef<HTMLElement>(null);
+    const narrator = getNarratorProfile(narratorId);
     const [selections, setSelections] = useState<Record<string, string>>(
         initialData?.selections ?? { scenario: 'scenario_nothing' }
     );
@@ -59,12 +62,16 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData }) 
     }, []);
 
     useEffect(() => {
-        const urls = section.choices
+        const urls = [
+            narrator.standingImage,
+            narrator.tableImage,
+            ...section.choices
             .map(choice => choice.image)
-            .filter((url): url is string => Boolean(url));
+            .filter((url): url is string => Boolean(url)),
+        ];
 
         gameImagePreloader.enqueue(urls, { priority: true });
-    }, [section]);
+    }, [narrator.standingImage, narrator.tableImage, section]);
 
     const handleSelect = (choiceId: string) => {
         const selectedChoice = section.choices.find(choice => choice.id === choiceId);
@@ -135,12 +142,12 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData }) 
                     />
                     <img
                         className="world-setup-stage-narrator"
-                        src="./assets/images/intro/violet_standing_dark_clear.png"
+                        src={narrator.standingImage}
                         alt=""
                     />
                     <img
                         className="world-setup-stage-table"
-                        src="./assets/images/stage/red_silk_table.png"
+                        src={narrator.tableImage}
                         alt=""
                     />
                 </div>
@@ -162,7 +169,7 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData }) 
                     >
                         <div className="world-setup-dialogue-copy">
                             <div className="world-setup-dialogue-header">
-                                <span className="world-setup-dialogue-name">바이올렛</span>
+                                <span className="world-setup-dialogue-name">{narrator.name}</span>
                                 <div className="world-setup-name-underline" />
                             </div>
                             <p>{displayedDialogue}</p>
