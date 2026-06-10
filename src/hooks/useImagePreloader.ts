@@ -6,6 +6,7 @@ const CRITICAL_IMAGE_URLS = [
   './assets/images/intro/1.webp',
   './assets/images/intro/noimage.webp',
   './assets/images/frame/card_frame.webp',
+  './assets/images/frame/card_backimage.webp',
   './assets/images/intro/violet_intro.webp',
 ];
 

@@ -13,7 +13,7 @@ import '../CYOABuilder/CYOABuilder.css';
 import './VioletDeckCYOA.css';
 import GoldParticles from '../common/GoldParticles';
 import { gameImagePreloader } from '../../utils/imagePreloader';
-import { getNarratorProfile } from '../../data/narrators';
+import { getNarratorCardAssets, getNarratorProfile, getNarratorStageBackground } from '../../data/narrators';
 
 import DialogueBox from '../common/DialogueBox/DialogueBox';
 
@@ -29,6 +29,8 @@ const VioletDeckCYOA = ({ onBack, narratorId, ...builderProps }: VioletDeckCYOAP
   const [dialogueText, setDialogueText] = useState<string | null>(null);
   const [dialogueRequirements, setDialogueRequirements] = useState<string | null>(null);
   const narrator = getNarratorProfile(narratorId);
+  const stageBackground = getNarratorStageBackground(narratorId, 'cyoa');
+  const cardAssets = getNarratorCardAssets(narrator.id);
   const builder = useCYOABuilder(builderProps);
 
   const activeSection = builder.activeSection ?? initialCYOAData.sections[0];
@@ -50,13 +52,16 @@ const VioletDeckCYOA = ({ onBack, narratorId, ...builderProps }: VioletDeckCYOAP
     const urls = [
       narrator.standingImage,
       narrator.tableImage,
+      stageBackground,
+      cardAssets.frameImage,
+      cardAssets.backImage,
       ...activeSection.choices
       .flatMap(choice => [choice.image, choice.selectedImage])
       .filter((url): url is string => Boolean(url)),
     ];
 
     gameImagePreloader.enqueue(urls, { priority: true });
-  }, [activeSection, narrator.standingImage, narrator.tableImage]);
+  }, [activeSection, narrator.standingImage, narrator.tableImage, stageBackground, cardAssets.frameImage, cardAssets.backImage]);
 
   const choiceGroups = (() => {
     const ungroupedChoices: Choice[] = [];
@@ -140,6 +145,7 @@ const VioletDeckCYOA = ({ onBack, narratorId, ...builderProps }: VioletDeckCYOAP
         playerStats={builder.finalStats}
         observerBlocked={false}
         dealFrom="top"
+        narratorId={narrator.id}
       />
     );
   };
@@ -168,7 +174,7 @@ const VioletDeckCYOA = ({ onBack, narratorId, ...builderProps }: VioletDeckCYOAP
         <div className="violet-stage" aria-hidden="true">
           <img
             className="violet-stage-bg"
-            src="./assets/images/backgrounds/boon_relic_library_4k.webp"
+            src={stageBackground}
             alt=""
           />
           <img

@@ -1,0 +1,151 @@
+알겠습니다. **완충영역 관련 문장만 삭제**했습니다. 다른 이상한 조건 추가 안 했습니다.
+
+## `angel/world_setup.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty polished white marble floor, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A celestial white marble temple under a brilliant starry night sky, designed as a wide fantasy game UI background. In the upper area, an unlabeled luminous world map relief is carved into the central marble wall beneath the stars. Around it, golden clocks, astrolabes, armillary spheres, celestial observation instruments, and constellation rings are built into marble arches and balcony niches, feeling like a sacred observatory rather than separate props. White marble, soft gold accents, sacred historical archive mood, polished anime fantasy background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `angel/cyoa.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty polished white marble floor, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A sacred angelic marble archive beneath a brilliant starry night sky, designed as a wide fantasy game UI background. In the upper area, quiet archive alcoves, sealed manuscript drawers, glowing seed vials, small crystal reliquaries, feather emblems, and ceremonial tool silhouettes are woven into the marble wall and bookshelves. The details should feel like historical records and ritual traces embedded in the architecture, with no catalog-like staging. White marble, soft gold light, sacred CYOA selection chamber, polished anime fantasy background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `angel/reward.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty polished white marble floor, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A heavenly marble reward hall beneath a brilliant starry night sky, designed as a wide fantasy game UI background. In the upper area, a luminous halo-shaped rose window, a crystal vessel set into a wall niche, golden feather reliefs, and an engraved celestial seal appear as part of the sacred architecture. The side alcoves hold subtle reliquary details and soft reflected gold light, restrained and naturally built into the sanctuary. White marble, soft gold, celestial reward chamber, polished anime fantasy background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `demon/world_setup.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty black stone floor, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A demonic black-stone world setup chamber beneath a crimson starry night sky, designed as a wide fantasy game UI background. In the upper area, an unlabeled dark world map is carved directly into the central obsidian wall, lit by thin crimson cracks. Around it, infernal clocks, black astrolabes, red observation instruments, ember-lit armillary forms, and jagged black-stone arches are fused into the chamber architecture like an ancient forbidden observatory. Obsidian, red cracks, smoky atmosphere, polished dark fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `demon/cyoa.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty black stone floor, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A forbidden demonic archive beneath a crimson starry night sky, designed as a wide fantasy game UI background. In the upper area, obsidian archive niches, chained grimoires, ember-lit stone tablets, sealed specimen jars, infernal seed capsules, and dark ritual markings are built into the back wall and side shelves. The details should feel like dangerous research left inside an old chamber, uneven and naturally absorbed into the room. Black stone, red glow, smoky magical atmosphere, polished dark fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `demon/reward.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty black stone floor, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A demonic obsidian reward vault beneath a crimson starry night sky, designed as a wide fantasy game UI background. In the upper area, a black crown motif, blood-red crystal glow, infernal contract seal, and sharp obsidian wall relief appear as ominous architectural symbols. The side recesses show faint metallic glints, sealed coffers half-lost in shadow, and corrupted red reflections, restrained by the old vault atmosphere. Polished dark fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `mountain_spirit/world_setup.webp`
+
+```text
+Space control: Composition must be extremely top-weighted and centered. Use a calm, nearly symmetrical composition with balanced left and right visual weight, and keep the main upper feature aligned to the vertical centerline. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty wooden pavilion floor or flat moonlit stone courtyard, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A Joseon-style mountain pavilion beneath a clear starry night sky, designed as a wide fantasy game UI background. In the upper area, an unlabeled old world map or historical map screen hangs naturally beneath the pavilion eaves, made of silk, wood, and faint jade spirit light. Around it, antique clocks, celestial observation tools, armillary forms, sundial-like instruments, scrolls, pine branches, and tiled roof lines are integrated into the pavilion structure like a quiet scholarly lookout. Jade mist, moonlit wood and stone, polished fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `mountain_spirit/cyoa.webp`
+
+```text
+Space control: Composition must be extremely top-weighted and centered. Use a calm, nearly symmetrical composition with balanced left and right visual weight, and keep the main upper feature aligned to the vertical centerline. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty wooden pavilion floor or flat moonlit stone courtyard, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A sacred Joseon mountain pavilion archive beneath a clear starry night sky, designed as a wide fantasy game UI background. In the upper area, wooden archive shelves, old books, scroll bundles, map cases, royal records, medicinal jars, seed pouches, and small jade spirit charms sit naturally among beams and lattice shadows. The objects should feel like a lived-in scholarly pavilion touched by mountain spirits, not a neatly sorted catalog. Calm mountain spirit mood, moonlit wood, soft jade mist, polished fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `mountain_spirit/reward.webp`
+
+```text
+Space control: Composition must be extremely top-weighted and centered. Use a calm, nearly symmetrical composition with balanced left and right visual weight, and keep the main upper feature aligned to the vertical centerline. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty wooden pavilion floor or flat moonlit stone courtyard, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A Joseon mountain spirit reward pavilion beneath a clear starry night sky, designed as a wide fantasy game UI background. In the upper area, a jade seal impression, sacred pine branch, royal tablet, spirit-pearl glow, and old bronze charm motifs are worked into hanging scrolls, carved beams, and quiet wall niches. The surrounding shelves suggest silk-wrapped records and ancestral keepsakes, understated and naturally placed within the pavilion. Moonlit pavilion, jade mist, polished fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `vengeful_spirit/world_setup.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty dark stone ground or graveyard path, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A haunted graveyard world setup space beneath a cold starry night sky, designed as a wide fantasy game UI background. In the upper area, an unlabeled ghostly world map is carved into an old memorial stone at the center, softened by cold moonlight. Around it, broken clocks, spectral observation instruments, cracked armillary forms, old tombstones, memorial tablets, pale blue spirit lights, and drifting grave mist feel weathered into the graveyard rather than arranged as props. Cold moonlight, dark stone, mournful fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `vengeful_spirit/cyoa.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty dark stone ground or graveyard path, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A sorrowful spirit archive in an old graveyard beneath a cold starry night sky, designed as a wide fantasy game UI background. In the upper area, weathered books, funeral records, stone tablets, sealed glass jars, memorial offerings, mourning ribbons, and faintly cursed inscriptions are tucked into old tomb markers and ghostly archive shelves. The objects should feel like remnants of mourning and memory absorbed by the graveyard, irregular and weathered by time. Pale blue spirit light, low mist, polished dark fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `vengeful_spirit/reward.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty dark stone ground or graveyard path, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A vengeful spirit reward shrine beneath a cold starry night sky, designed as a wide fantasy game UI background. In the upper area, cracked memorial jewel light, a long dark shadow, a spirit lantern, funeral seal markings, and pale blue soul-crystal glow are absorbed into the shrine stones and memorial tablets. The side areas show modest grave goods, ritual ornaments, and misty offerings as part of the burial atmosphere, subdued and naturally weathered. Cold moonlight, tombstone atmosphere, polished dark fantasy anime background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `ai_avatar/world_setup.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty metallic deck floor or open platform, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A futuristic spaceship observation chamber facing a vast starry space panorama, designed as a wide sci-fi fantasy game UI background. In the upper area, an unlabeled holographic world map glows at the center of the window architecture with subtle orbital history lines. Around it, digital clocks, orbital observation instruments, holographic astrolabe forms, star-tracking devices, and transparent data rings are integrated into the ship's upper consoles and glass framework. Clean sci-fi, teal glow, polished anime game background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `ai_avatar/cyoa.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty metallic deck floor or open platform, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A spaceship simulation archive beneath a vast starry space view, designed as a wide sci-fi fantasy game UI background. In the upper area, holographic data libraries, transparent archive blocks, seed specimen capsules, biological sample canisters, modular tech components, and teal information panes are integrated into the upper wall consoles. The scene should feel like a working simulation archive inside a quiet spacecraft, practical and built-in rather than staged. Clean sci-fi, metallic deck, polished anime game background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```
+
+## `ai_avatar/reward.webp`
+
+```text
+Space control: Composition must be extremely top-weighted. All important objects must stay only in the upper 35% of the image. The lower 65% must be an uninterrupted empty metallic deck floor or open platform, with no objects, no pillars, no treasure, no steps, no altar, no pedestals, no decorative stands, no strong horizon line, no visual clutter. No important objects below 35% image height. No objects extending into the lower half. No bottom-heavy composition.
+
+A futuristic spaceship reward vault beneath a vast starry space panorama, designed as a wide sci-fi fantasy game UI background. In the upper area, a glowing data core, quantum-crystal light, sealed technology capsule, orbital key silhouette, and crown-like holographic pattern are embedded into the ship's upper wall systems. The side areas suggest sealed resource lockers and faint metallic reflections, practical and naturally integrated into the spacecraft interior. Clean teal sci-fi, polished anime game background.
+
+Strict constraints: 16:9 wide background, 3840x2160. No characters, no people, no readable text, no letters, no numbers, no logo, no watermark.
+```

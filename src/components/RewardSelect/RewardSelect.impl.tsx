@@ -6,7 +6,7 @@ import TagTooltip from '../common/TagTooltip';
 import ChoiceLightbox from '../CYOABuilder/ChoiceLightbox';
 import GoldParticles from '../common/GoldParticles';
 import { gameImagePreloader } from '../../utils/imagePreloader';
-import { getNarratorProfile } from '../../data/narrators';
+import { getNarratorProfile, getNarratorStageBackground } from '../../data/narrators';
 
 interface RewardChoice {
     id: string;
@@ -40,13 +40,15 @@ const rewardSelectData: RewardSection[] = [
 
 interface RewardSelectProps {
     onComplete: (data: { name: string; points: number; choices: string[]; tags: string[]; rawSelections: Record<string, string>; lastStep: number }) => void;
+    onBack?: () => void;
     initialData?: { name: string; selections: Record<string, string>; startStep: number };
     narratorId?: string | null;
 }
 
-const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData, narratorId }) => {
+const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, onBack, initialData, narratorId }) => {
     const cardTableRef = useRef<HTMLElement>(null);
     const narrator = getNarratorProfile(narratorId);
+    const stageBackground = getNarratorStageBackground(narratorId, 'reward');
     const [selections, setSelections] = useState<Record<string, string>>(
         initialData?.selections ?? { scenario: 'scenario_nothing' }
     );
@@ -65,13 +67,14 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData, na
         const urls = [
             narrator.standingImage,
             narrator.tableImage,
+            stageBackground,
             ...section.choices
             .map(choice => choice.image)
             .filter((url): url is string => Boolean(url)),
         ];
 
         gameImagePreloader.enqueue(urls, { priority: true });
-    }, [narrator.standingImage, narrator.tableImage, section]);
+    }, [narrator.standingImage, narrator.tableImage, section, stageBackground]);
 
     const handleSelect = (choiceId: string) => {
         const selectedChoice = section.choices.find(choice => choice.id === choiceId);
@@ -129,7 +132,6 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData, na
                 isOpen={!!lightboxChoice}
                 onClose={() => setLightboxChoice(null)}
                 image={lightboxChoice?.image}
-                choiceId={lightboxChoice?.id ?? ''}
                 choiceName={lightboxChoice?.name ?? ''}
             />
 
@@ -137,9 +139,10 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData, na
                 <div className="world-setup-stage" aria-hidden="true">
                     <img
                         className="world-setup-stage-bg"
-                        src="./assets/images/backgrounds/reward_crystal_treasure_room_4k.webp"
+                        src={stageBackground}
                         alt=""
                     />
+                    <div className="world-setup-scene-shade" aria-hidden="true" />
                     <img
                         className="world-setup-stage-narrator"
                         src={narrator.standingImage}
@@ -151,7 +154,6 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData, na
                         alt=""
                     />
                 </div>
-                <div className="world-setup-scene-shade" aria-hidden="true" />
                 <GoldParticles count={55} intensity="high" />
 
                 <section
@@ -249,7 +251,7 @@ const RewardSelect: React.FC<RewardSelectProps> = ({ onComplete, initialData, na
                 </section>
 
                 <footer className="world-setup-footer">
-                    <button className="nav-button back" disabled>
+                    <button className="nav-button back" onClick={onBack} disabled={!onBack}>
                         <ArrowLeft size={18} />
                         <span>이전</span>
                     </button>

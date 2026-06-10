@@ -125,22 +125,27 @@ const Intro: React.FC<IntroProps> = ({ onStart, onLoad, onImport, onDevNavigate 
         <div className={`intro-overlay ${isExiting ? 'exiting' : ''}`}>
             <Background showStars={false} />
 
-            <div className="intro-curtain-closed" aria-hidden="true">
-                <div className="intro-curtain-closed-panel intro-curtain-closed-panel-left" />
-                <div className="intro-curtain-closed-panel intro-curtain-closed-panel-right" />
-                <div className="intro-curtain-closed-seam" />
-            </div>
+            {/* 대기 상태에서 닫혀 있는 일상 방(책상) 패널 */}
+            {!isExiting && (
+                <div className="temporal-rift-closed" aria-hidden="true">
+                    <div className="temporal-rift-closed-panel temporal-rift-closed-panel-left" />
+                    <div className="temporal-rift-closed-panel temporal-rift-closed-panel-right" />
+                </div>
+            )}
+
+            {/* 대기 상태의 중앙 세로 균열선 */}
+            {!isExiting && <div className="temporal-rift-line" aria-hidden="true" />}
 
             <div className={`intro-content ${showContent ? 'fade-in' : ''}`}>
                 <div className="intro-title-container">
-                    <h1 className="intro-title-sub">Authentic Fantasy CYOA</h1>
-                    <h1 className="intro-title-main">정통 판타지 CYOA</h1>
+                    <h1 className="intro-title-sub">Alternative History CYOA</h1>
+                    <h1 className="intro-title-main">대체역사 CYOA</h1>
                 </div>
 
                 <div className="intro-divider"></div>
 
                 <p className="intro-description">
-                    <span className="intro-emphasis">모종의 힘이 당신을 이세계로 인도합니다.</span><br />
+                    <span className="intro-emphasis">모종의 힘이 당신을 시간축 너머로 인도합니다.</span><br />
                     <span className="intro-emphasis">수락하시겠습니까?</span>
                 </p>
 
@@ -255,24 +260,24 @@ const Intro: React.FC<IntroProps> = ({ onStart, onLoad, onImport, onDevNavigate 
 
             <AnimatePresence>
                 {isExiting && (
-                    <div className="intro-curtain" aria-hidden="true">
+                    <div className="temporal-rift-container" aria-hidden="true">
                         <motion.div
-                            className="intro-curtain-panel intro-curtain-panel-left"
+                            className="temporal-rift-panel temporal-rift-panel-left"
                             initial={{ x: '0%' }}
                             animate={{ x: '-102%' }}
                             transition={{ duration: 1.15, ease: [0.7, 0, 0.3, 1] }}
                         />
                         <motion.div
-                            className="intro-curtain-panel intro-curtain-panel-right"
+                            className="temporal-rift-panel temporal-rift-panel-right"
                             initial={{ x: '0%' }}
                             animate={{ x: '102%' }}
                             transition={{ duration: 1.15, ease: [0.7, 0, 0.3, 1] }}
                         />
                         <motion.div
-                            className="intro-curtain-seam-glow"
+                            className="temporal-rift-seam-glow"
                             initial={{ opacity: 0.7, scaleY: 0.92 }}
                             animate={{ opacity: 0, scaleY: 1.08 }}
-                            transition={{ duration: 0.7, ease: 'easeOut' }}
+                            transition={{ duration: 0.3, ease: 'easeOut' }}
                         />
                     </div>
                 )}

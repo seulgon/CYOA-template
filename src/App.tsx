@@ -202,6 +202,10 @@ function App() {
     setPhase('WORLD_SETUP');
   };
 
+  const handleBackToCYOABuild = () => {
+    setPhase('CYOA_BUILD');
+  };
+
   const handleConfirmBuild = () => {
     setPhase('INTRO');
   };
@@ -287,7 +291,7 @@ function App() {
             zIndex: 3000,
             padding: '0.55rem 0.85rem',
             borderRadius: '999px',
-            border: '1px solid rgba(235, 192, 80, 0.35)',
+            border: '1px solid rgba(255, 255, 255, 0.25)',
             background: 'rgba(12, 12, 18, 0.72)',
             color: 'var(--text-secondary, #d8d8d8)',
             boxShadow: '0 10px 28px rgba(0, 0, 0, 0.35)',
@@ -337,6 +341,7 @@ function App() {
         {phase === 'WORLD_SETUP' && (
           <WorldSetup
             onComplete={handleWorldSetupComplete}
+            onBack={() => setPhase('NARRATOR_SELECT')}
             narratorId={selectedNarrator}
             initialData={worldSetupResults ? {
               name: worldSetupResults.name,
@@ -383,6 +388,7 @@ function App() {
         {phase === 'REWARD_SELECT' && characterData && (
           <RewardSelect
             onComplete={handleRewardSelectComplete}
+            onBack={handleBackToCYOABuild}
             narratorId={selectedNarrator ?? characterData.narratorId ?? worldSetupResults?.narratorId}
             initialData={rewardSelectResults ? {
               name: rewardSelectResults.name,

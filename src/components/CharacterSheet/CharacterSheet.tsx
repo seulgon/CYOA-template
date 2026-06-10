@@ -73,7 +73,10 @@ const CharacterSheet: React.FC<CharacterSheetProps> = (props) => {
                             skillEntries={skillEntries}
                             tags={tags}
                         />
-                        <CharacterChoices selectedChoicesGrouped={selectedChoicesGrouped} />
+                        <CharacterChoices
+                            selectedChoicesGrouped={selectedChoicesGrouped}
+                            narratorId={characterData.narratorId ?? characterData.worldSetup?.narratorId}
+                        />
                         <CharacterActions
                             isCapturing={isCapturing}
                             handleBack={handleBack}

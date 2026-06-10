@@ -6,7 +6,7 @@ import TagTooltip from '../common/TagTooltip';
 import ChoiceLightbox from '../CYOABuilder/ChoiceLightbox';
 import GoldParticles from '../common/GoldParticles';
 import { gameImagePreloader } from '../../utils/imagePreloader';
-import { getNarratorProfile } from '../../data/narrators';
+import { getNarratorProfile, getNarratorStageBackground } from '../../data/narrators';
 
 interface WorldSetupChoice {
     id: string;
@@ -51,11 +51,13 @@ interface WorldSetupProps {
     onComplete: (data: { name: string; points: number; choices: string[]; tags: string[]; rawSelections: Record<string, string>; lastStep: number }) => void;
     initialData?: { name: string; selections: Record<string, string>; startStep: number };
     narratorId?: string | null;
+    onBack?: () => void;
 }
 
-const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narratorId }) => {
+const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narratorId, onBack }) => {
     const cardTableRef = useRef<HTMLElement>(null);
     const narrator = getNarratorProfile(narratorId);
+    const stageBackground = getNarratorStageBackground(narratorId, 'worldSetup');
     const [currentStep, setCurrentStep] = useState(initialData?.startStep ?? 0);
     const [selections, setSelections] = useState<Record<string, string>>(
         initialData?.selections ?? {}
@@ -111,6 +113,8 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narrat
         if (currentStep > 0) {
             setDialogueText(null);
             setCurrentStep(currentStep - 1);
+        } else if (onBack) {
+            onBack();
         }
     };
 
@@ -124,13 +128,14 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narrat
         const urls = [
             narrator.standingImage,
             narrator.tableImage,
+            stageBackground,
             ...(section.choices
             ?.map(choice => choice.image)
             .filter((url): url is string => Boolean(url)) ?? []),
         ];
 
         gameImagePreloader.enqueue(urls, { priority: true });
-    }, [narrator.standingImage, narrator.tableImage, section]);
+    }, [narrator.standingImage, narrator.tableImage, section, stageBackground]);
 
     return (
         <div className="world-setup-overlay">
@@ -138,7 +143,6 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narrat
                 isOpen={!!lightboxChoice}
                 onClose={() => setLightboxChoice(null)}
                 image={lightboxChoice?.image}
-                choiceId={lightboxChoice?.id ?? ''}
                 choiceName={lightboxChoice?.name ?? ''}
             />
 
@@ -146,9 +150,10 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narrat
                 <div className="world-setup-stage" aria-hidden="true">
                     <img
                         className="world-setup-stage-bg"
-                        src="./assets/images/backgrounds/timeline_map_clock_room_4k.webp"
+                        src={stageBackground}
                         alt=""
                     />
+                    <div className="world-setup-scene-shade" aria-hidden="true" />
                     <img
                         className="world-setup-stage-narrator"
                         src={narrator.standingImage}
@@ -160,7 +165,6 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narrat
                         alt=""
                     />
                 </div>
-                <div className="world-setup-scene-shade" aria-hidden="true" />
                 <GoldParticles count={55} intensity="high" />
 
                 <section
@@ -286,7 +290,7 @@ const WorldSetup: React.FC<WorldSetupProps> = ({ onComplete, initialData, narrat
                     <button
                         className="nav-button back"
                         onClick={handleBack}
-                        disabled={currentStep === 0}
+                        disabled={currentStep === 0 && !onBack}
                     >
                         <ArrowLeft size={18} />
                         <span>이전</span>

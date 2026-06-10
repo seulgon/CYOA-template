@@ -1,24 +1,19 @@
 import { CUTSCENE_DATA } from '../data/cutscenes/cutsceneData';
 import { initialCYOAData } from '../data/cyoa';
-import { getNarratorImageUrls } from '../data/narrators';
+import { getNarratorCardAssetUrls, getNarratorImageUrls, getNarratorStageBackgroundUrls } from '../data/narrators';
 import { normalizeImageUrl } from './imagePreloader';
 
 export const CRITICAL_IMAGE_URLS = [
   './assets/images/intro/1.webp',
   './assets/images/intro/noimage.webp',
   './assets/images/frame/card_frame.webp',
+  './assets/images/frame/card_backimage.webp',
   './assets/images/intro/violet_intro.webp',
 ];
 
 const STAGE_LAYER_URLS = [
   './assets/images/intro/violet_standing_dark_clear.png',
 ];
-
-const STAGE_BACKGROUND_URLS = {
-  timeline: './assets/images/backgrounds/timeline_map_clock_room_4k.webp',
-  boonLibrary: './assets/images/backgrounds/boon_relic_library_4k.webp',
-  rewardTreasure: './assets/images/backgrounds/reward_crystal_treasure_room_4k.webp',
-};
 
 const uniqueUrls = (urls: Array<string | null | undefined>): string[] => (
   Array.from(new Set(urls.filter((url): url is string => !!url).map(normalizeImageUrl).filter(Boolean)))
@@ -61,7 +56,8 @@ export const getFirstCyoaSectionImageUrls = (): string[] => {
 export const getAllGameImageUrls = (): string[] => (
   uniqueUrls([
     ...CRITICAL_IMAGE_URLS,
-    ...Object.values(STAGE_BACKGROUND_URLS),
+    ...getNarratorCardAssetUrls(),
+    ...getNarratorStageBackgroundUrls(),
     ...STAGE_LAYER_URLS,
     ...getNarratorImageUrls(),
     ...getCutsceneImageUrls(),
@@ -82,14 +78,15 @@ export const getPhaseImageUrls = (phase: string): string[] => {
       ]);
     case 'CYOA_BUILD':
       return uniqueUrls([
-        STAGE_BACKGROUND_URLS.boonLibrary,
+        ...getNarratorStageBackgroundUrls(),
+        ...getNarratorCardAssetUrls(),
         ...STAGE_LAYER_URLS,
         ...getNarratorImageUrls(),
         ...getFirstCyoaSectionImageUrls(),
       ]);
     case 'WORLD_SETUP':
       return uniqueUrls([
-        STAGE_BACKGROUND_URLS.timeline,
+        ...getNarratorStageBackgroundUrls(),
         ...STAGE_LAYER_URLS,
         ...getNarratorImageUrls(),
       ]);
@@ -97,7 +94,7 @@ export const getPhaseImageUrls = (phase: string): string[] => {
       return getCutsceneImageUrls('LOCATION_CUTSCENE');
     case 'REWARD_SELECT':
       return uniqueUrls([
-        STAGE_BACKGROUND_URLS.rewardTreasure,
+        ...getNarratorStageBackgroundUrls(),
         ...STAGE_LAYER_URLS,
         ...getNarratorImageUrls(),
       ]);

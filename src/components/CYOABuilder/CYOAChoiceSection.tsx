@@ -8,9 +8,10 @@ import { LayoutGrid, List, ChevronUp, ChevronDown } from 'lucide-react';
 
 interface CYOAChoiceSectionProps {
     builder: CYOABuilderViewModel;
+    narratorId?: string | null;
 }
 
-const CYOAChoiceSection: React.FC<CYOAChoiceSectionProps> = ({ builder }) => {
+const CYOAChoiceSection: React.FC<CYOAChoiceSectionProps> = ({ builder, narratorId }) => {
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const [collapsedGroups, setCollapsedGroups] = useState<Record<string, boolean>>({});
     // 스크롤이 top에 도달할 때까지 Observer를 차단
@@ -160,6 +161,7 @@ const CYOAChoiceSection: React.FC<CYOAChoiceSectionProps> = ({ builder }) => {
                 unlockedChoiceNames={unlockedChoiceNames}
                 playerStats={builder.finalStats}
                 observerBlocked={cardsBlocked}
+                narratorId={narratorId}
             />
         );
     };

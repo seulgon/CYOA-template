@@ -5,8 +5,8 @@ interface ChoiceLightboxProps {
     isOpen: boolean;
     onClose: () => void;
     image?: string;
+    frameImage?: string;
     useFrame?: boolean;
-    choiceId: string;
     choiceName: string;
 }
 
@@ -14,8 +14,8 @@ const ChoiceLightbox: React.FC<ChoiceLightboxProps> = ({
     isOpen,
     onClose,
     image,
+    frameImage = './assets/images/frame/card_frame.webp',
     useFrame,
-    choiceId,
     choiceName
 }) => {
     if (!isOpen || !image) return null;
@@ -90,7 +90,11 @@ const ChoiceLightbox: React.FC<ChoiceLightboxProps> = ({
 
                 {/* Framed image in lightbox */}
                 {isFramed && (
-                    <div style={{ position: 'relative', width: isMobile ? 'min(92vw, 82vh)' : 'min(60vmin, 600px)' }}>
+                    <div style={{
+                        position: 'relative',
+                        width: isMobile ? 'min(92vw, 82vh)' : 'min(60vmin, 600px)',
+                        overflow: 'hidden',
+                    }}>
                         <img
                             src={image}
                             alt={choiceName}
@@ -99,14 +103,14 @@ const ChoiceLightbox: React.FC<ChoiceLightboxProps> = ({
                                 top: '6.5%',
                                 left: '7.5%',
                                 width: '85%',
-                                height: '82%',
+                                height: '94%',
                                 objectFit: 'cover',
                                 objectPosition: 'center',
                                 zIndex: 1,
                             }}
                         />
                         <img
-                            src="./assets/images/frame/card_frame.webp"
+                            src={frameImage}
                             alt="frame"
                             style={{
                                 position: 'relative',
@@ -116,26 +120,6 @@ const ChoiceLightbox: React.FC<ChoiceLightboxProps> = ({
                                 zIndex: 2,
                             }}
                         />
-                        <div style={{
-                            position: 'absolute',
-                            bottom: '4.5%',
-                            left: '12%',
-                            width: '76%',
-                            height: '6%',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            zIndex: 3,
-                            color: 'var(--accent-color)',
-                            fontWeight: '900',
-                            fontSize: '1.1rem',
-                            letterSpacing: '1px',
-                            textTransform: 'uppercase',
-                            fontFamily: 'Georgia, serif',
-                            textShadow: '0px 1px 3px rgba(0,0,0,0.9)',
-                        }}>
-                            {choiceId.replace(/_/g, ' ')}
-                        </div>
                     </div>
                 )}
 

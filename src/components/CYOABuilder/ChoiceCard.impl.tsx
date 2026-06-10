@@ -10,6 +10,7 @@ import StatAdjuster from './StatAdjuster';
 import type { StatAdjustmentData } from './StatAdjuster';
 import FormulaTooltip from '../common/FormulaTooltip';
 import Card3DWrapper from './Card3DWrapper';
+import { getNarratorCardAssets } from '../../data/narrators';
 import './ChoiceCard.css';
 
 const RevealBlock = ({ children, delay, triggered }: { children: React.ReactNode, delay: number, triggered: boolean }) => (
@@ -53,18 +54,20 @@ interface ChoiceCardProps {
     index?: number;
     observerBlocked?: boolean;
     dealFrom?: 'default' | 'top';
+    narratorId?: string | null;
 }
 
 const ChoiceCard: React.FC<ChoiceCardProps> = ({ 
     choice, isSelected, onSelect, disabled, disabledReason, isFree, discountAmount, 
     grantedChoiceNames, statAdjustment, variant = 'default', hideImage = false, 
     isListView = false, unlockedChoiceNames, index = 0, observerBlocked = false,
-    dealFrom = 'default'
+    dealFrom = 'default', narratorId
 }) => {
     const isCondensed = variant === 'condensed';
     const isStatAdjustmentCard = !!statAdjustment;
     const [isInitial, setIsInitial] = React.useState(true);
     const [lightboxOpen, setLightboxOpen] = React.useState(false);
+    const cardAssets = getNarratorCardAssets(narratorId);
 
     // 내부 애니메이션 타이밍을 위한 계산
     const flyInDelay = index * 0.08;
@@ -120,8 +123,8 @@ const ChoiceCard: React.FC<ChoiceCardProps> = ({
                 isOpen={lightboxOpen}
                 onClose={closeLightbox}
                 image={displayImage}
+                frameImage={cardAssets.frameImage}
                 useFrame={choice.useFrame}
-                choiceId={choice.id}
                 choiceName={choice.name}
             />
 
@@ -166,6 +169,7 @@ const ChoiceCard: React.FC<ChoiceCardProps> = ({
                         <ChoiceImage
                             choice={choice}
                             displayImage={displayImage}
+                            frameImage={cardAssets.frameImage}
                             isSelected={isSelected}
                             isInitial={isInitial}
                             randomDelay={randomDelay}
@@ -405,7 +409,7 @@ const ChoiceCard: React.FC<ChoiceCardProps> = ({
                     }}
                 >
                     <img 
-                        src="./assets/images/frame/card_backimage.webp" 
+                        src={cardAssets.backImage}
                         alt="Card Back" 
                         loading="lazy"
                         decoding="async"

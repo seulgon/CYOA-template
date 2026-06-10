@@ -1,23 +1,28 @@
 import type React from 'react';
 import IconRenderer from '../common/IconRenderer';
 import type { SelectedChoiceGroup } from './useCharacterSheet';
+import { getNarratorCardAssets } from '../../data/narrators';
 
 interface CharacterChoicesProps {
     selectedChoicesGrouped: SelectedChoiceGroup[];
+    narratorId?: string | null;
 }
 
-const CharacterChoices: React.FC<CharacterChoicesProps> = ({ selectedChoicesGrouped }) => (
-    <>
-        {selectedChoicesGrouped.length > 0 && (
-            <div className="char-sheet-section">
-                <h3>9. 선택한 특성</h3>
-                {selectedChoicesGrouped.map(group => (
-                    <div key={group.sectionTitle} style={{ marginBottom: '1rem' }}>
-                        <div style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: 'bold', marginBottom: '0.5rem' }}>{group.sectionTitle}</div>
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }}>
-                            {group.choices.map(choice => {
-                                return (
-                                    <div key={choice.id} style={{
+const CharacterChoices: React.FC<CharacterChoicesProps> = ({ selectedChoicesGrouped, narratorId }) => {
+    const cardAssets = getNarratorCardAssets(narratorId);
+
+    return (
+        <>
+            {selectedChoicesGrouped.length > 0 && (
+                <div className="char-sheet-section">
+                    <h3>9. 선택한 특성</h3>
+                    {selectedChoicesGrouped.map(group => (
+                        <div key={group.sectionTitle} style={{ marginBottom: '1rem' }}>
+                            <div style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: 'bold', marginBottom: '0.5rem' }}>{group.sectionTitle}</div>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '0.75rem' }}>
+                                {group.choices.map(choice => {
+                                    return (
+                                        <div key={choice.id} style={{
                                         background: 'rgba(255,255,255,0.05)',
                                         borderRadius: '8px',
                                         border: '1px solid rgba(255,255,255,0.1)',
@@ -42,7 +47,7 @@ const CharacterChoices: React.FC<CharacterChoicesProps> = ({ selectedChoicesGrou
                                                         top: '6.5%',
                                                         left: '7.5%',
                                                         width: '85%',
-                                                        height: '82%',
+                                                        height: '94%',
                                                         objectFit: 'cover',
                                                         objectPosition: 'center',
                                                         zIndex: 1
@@ -50,7 +55,7 @@ const CharacterChoices: React.FC<CharacterChoicesProps> = ({ selectedChoicesGrou
                                                     loading="lazy"
                                                 />
                                                 <img
-                                                    src="./assets/images/frame/card_frame.webp"
+                                                    src={cardAssets.frameImage}
                                                     alt="frame"
                                                     style={{
                                                         position: 'relative',
@@ -62,25 +67,6 @@ const CharacterChoices: React.FC<CharacterChoicesProps> = ({ selectedChoicesGrou
                                                     }}
                                                     loading="lazy"
                                                 />
-                                                <div style={{
-                                                    position: 'absolute',
-                                                    bottom: '4.5%',
-                                                    left: '12%',
-                                                    width: '76%',
-                                                    height: '6%',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    justifyContent: 'center',
-                                                    zIndex: 3,
-                                                    color: 'var(--accent-color)',
-                                                    fontWeight: '900',
-                                                    fontSize: '0.65rem',
-                                                    textTransform: 'uppercase',
-                                                    fontFamily: 'Georgia, serif',
-                                                    textShadow: '0px 1px 2px rgba(0,0,0,0.9)'
-                                                }}>
-                                                    {choice.id.replace(/_/g, ' ')}
-                                                </div>
                                             </div>
                                         )}
                                         {choice.image && !choice.useFrame && (
@@ -112,14 +98,15 @@ const CharacterChoices: React.FC<CharacterChoicesProps> = ({ selectedChoicesGrou
                                             <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>{choice.description}</div>
                                         </div>
                                     </div>
-                                );
-                            })}
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
-        )}
-    </>
-);
+                    ))}
+                </div>
+            )}
+        </>
+    );
+};
 
 export default CharacterChoices;

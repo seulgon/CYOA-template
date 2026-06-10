@@ -43,6 +43,7 @@ const ExpandButton: React.FC<{ onClick: (e: React.MouseEvent) => void }> = ({ on
 interface ChoiceImageProps {
     choice: Choice;
     displayImage?: string;
+    frameImage: string;
     isSelected: boolean;
     isInitial: boolean;
     randomDelay: string;
@@ -54,6 +55,7 @@ interface ChoiceImageProps {
 const ChoiceImage: React.FC<ChoiceImageProps> = ({
     choice,
     displayImage,
+    frameImage,
     isSelected,
     isInitial,
     randomDelay,
@@ -110,7 +112,7 @@ const ChoiceImage: React.FC<ChoiceImageProps> = ({
 
                     {/* 레이아웃 가이드용 투명 프레임: 높이를 프레임 카드와 100% 일치시킴 */}
                     <img
-                        src="./assets/images/frame/card_frame.webp"
+                        src={frameImage}
                         alt="layout guide"
                         style={{
                             position: 'relative',
@@ -168,7 +170,7 @@ const ChoiceImage: React.FC<ChoiceImageProps> = ({
                         top: '6.5%',
                         left: '7.5%',
                         width: '85%',
-                        height: '82%',
+                        height: '94%',
                         objectFit: 'cover',
                         objectPosition: 'center',
                         zIndex: 1,
@@ -179,7 +181,7 @@ const ChoiceImage: React.FC<ChoiceImageProps> = ({
                     }}
                 />
                 <img
-                    src="./assets/images/frame/card_frame.webp"
+                    src={frameImage}
                     alt="frame"
                     style={{
                         position: 'relative',
@@ -190,29 +192,6 @@ const ChoiceImage: React.FC<ChoiceImageProps> = ({
                         pointerEvents: 'none'
                     }}
                 />
-                <div style={{
-                    position: 'absolute',
-                    bottom: '4.5%',
-                    left: '12%',
-                    width: '76%',
-                    height: '6%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 3,
-                    color: 'var(--accent-color)',
-                    fontWeight: '900',
-                    fontSize: '0.9rem',
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                    fontFamily: 'Georgia, serif',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    textShadow: '0px 1px 2px rgba(0, 0, 0, 0.8)'
-                }}>
-                    {choice.id.replace(/_/g, ' ')}
-                </div>
             </div>
             {/* Expand button only for framed images (not noimage placeholder) */}
             {choice.useFrame && displayImage && (
